@@ -1,0 +1,42 @@
+// variables  
+
+//colors
+
+$background-black: #14191e;
+$background-gray: #f1f1f1;
+$white: #fff;
+$black: #000;
+$red: #c31a62;
+
+$font-size-s: 0.8rem;
+$font-size-m: 1rem;
+$font-size-l: 2rem;
+
+$font-weight-m: 300;
+$font-weight-l: 400;
+
+// margins
+$margin-s: 4px;
+$margin-m: 8px;
+$margin-l: 12px;
+$margin-logo: 30px;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  min-width: 1024px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
