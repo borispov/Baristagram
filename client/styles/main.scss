@@ -1,2 +1,5 @@
-// global, i.e variables, reset, normalize.
 @import 'global';
+@import '../components/Navbar/navbar.scss';
+@import '../components/Card/_card-container.scss';
+@import '../components/UserFloat/_userfloat.scss';
+@import '../components/Profile/Settings/_stats.scss';

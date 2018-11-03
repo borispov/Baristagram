@@ -1,0 +1,9 @@
+.stats {
+  display: inline-block;
+  &:nth-of-type(2n) {
+    margin-left: 5px;
+  }
+  .stats__title { 
+    color: #555252;
+  }
+}
