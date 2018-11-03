@@ -16,7 +16,9 @@ class ContentGrid extends React.Component {
       <Grid centered columns={4}>
         <div ref={this.handleContextRef}></div>
         <Grid.Column width={10}>
-            <CardContainer />
+            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=1" />
+            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=2" />
+            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=3" />
         </Grid.Column>
 
         <Grid.Column width={3}>

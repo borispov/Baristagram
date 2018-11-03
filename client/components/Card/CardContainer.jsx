@@ -8,6 +8,7 @@ import CardIcons from './CardIcons'
 import CommentSection from './Comments/CommentSection'
 import CommentBox from './Comments/CommentBox'
 
+const defaultRandom = 'https://source.unsplash.com/random/614x614'
 
 const CardContainer = (props) => {
 
@@ -20,7 +21,7 @@ const CardContainer = (props) => {
           <Author className="card-container__header"/>
         </div> 
       </Card.Content>
-      <LazyImage className="card-container__img" src="https://source.unsplash.com/random/614x614" rounded/>
+      <LazyImage className="card-container__img" src={props.source || defaultRandom} rounded/>
       <Card.Content>
         <CardIcons />
       </Card.Content>
