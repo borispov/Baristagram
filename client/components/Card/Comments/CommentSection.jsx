@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
 import { Comment } from 'semantic-ui-react'
 import logo from '../../../images/ma.png'
+import PropTypes from 'prop-types'
 
 class CommentSection extends Component {
+
+  static propTypes = {
+    classes: PropTypes.string
+  }
+
   render() {
     return (
       <Comment.Group>
 
-        <Comment>
+        <Comment className={this.props.classes && this.props.classes}>
           <Comment.Avatar src={logo} />
           <Comment.Author as='a'>{this.props.user || 'Johnsta Proshlow'}</Comment.Author>
           <Comment.Metadata>
@@ -16,7 +22,7 @@ class CommentSection extends Component {
           <Comment.Text>What a fantastic view, great shot Johnsta Proshlow!</Comment.Text>
         </Comment>
 
-        <Comment>
+        <Comment className={this.props.classes && this.props.classes}>
           <Comment.Avatar src={logo} />
           <Comment.Author as='a'>{this.props.user || 'Bohoe Menslo'}</Comment.Author>
           <Comment.Metadata>

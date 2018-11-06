@@ -11,11 +11,15 @@ const MenuBar = (props) => {
         <Container>
 
           <Menu.Item className="menu-item menu-item--first">
-            <Icon large="true" inverted link circular color="teal" name="instagram" />
+            <Link to="/">
+              <Icon large="true" inverted link circular color="teal" name="instagram" />
+            </Link>
           </Menu.Item>
 
           <Menu.Item className="menu-item">
-            <Header> Baristagram </Header>
+            <Link to="/">
+              <Header> Baristagram </Header>
+            </Link>
           </Menu.Item>
 
           <Menu.Item position="right">
@@ -27,7 +31,9 @@ const MenuBar = (props) => {
           </Menu.Item>
 
           <Menu.Item className="menu-item" >
-            <Icon size="large" link name="wpexplorer" />
+            <Link to="/explore">
+              <Icon size="large" link name="wpexplorer" />
+            </Link>
           </Menu.Item>
 
         </Container>

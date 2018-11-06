@@ -18,7 +18,7 @@ export class CommentBox extends Component {
 
   render() {
     return (
-      <Input onChange={this.onTextChange} className="comment-box" placeholder="Add a comment ..." focus="false">
+      <Input onChange={this.onTextChange} className="comment-box" placeholder="Add a comment ...">
       </Input>
     )
   }

@@ -32,7 +32,7 @@ const ProfilePage = () => {
           </Grid.Column>
           <Grid.Column mobile={12}>
             <div className="flex-row" style={flexRow}>
-            <Header verticalAlign="middle" as='h3' style={{padding: '0'}}>Johnsta Proshlow</Header>
+            <Header as='h3' style={{padding: '0'}}>Johnsta Proshlow</Header>
             <Button style={{marginLeft: '15px'}} compact basic >Edit Profile</Button>
             </div>
             <Stats /> 

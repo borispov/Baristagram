@@ -7,7 +7,7 @@ export class SearchBar extends Component {
   render() {
     return (
       <div className="search-bar">
-        <Search placeholder="Search" />
+        <Search className="search-bar" placeholder="Search" />
       </div>
     )
   }

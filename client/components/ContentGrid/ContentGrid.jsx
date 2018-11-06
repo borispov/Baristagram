@@ -2,11 +2,18 @@ import React from 'react'
 import { Sticky, Grid, Container, Segment } from 'semantic-ui-react'
 import UserFloat from '../UserFloat/UserFloat'
 import CardContainer from '../Card/CardContainer'
-
+import PropTypes from 'prop-types'
+import LoginForm from '../Login/Login'
 
 class ContentGrid extends React.Component {
 
-  state = {}
+  static propTypes = {
+    isLogged: PropTypes.bool
+  }
+
+  static defaultProps = {
+    isLogged: false
+  }
 
   handleContextRef = contextRef => this.setState({ contextRef })
 

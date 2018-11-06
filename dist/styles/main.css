@@ -19,6 +19,9 @@ a {
 .menu-item {
   box-shadow: 1px 0 4px 0px rgba(0, 0, 0, 0.05); }
 
+.prompt {
+  background: rgba(201, 198, 198, 0.15) !important; }
+
 .card-container {
   margin: 40px auto 0 !important;
   max-width: 614px !important;
@@ -86,3 +89,44 @@ a {
     margin-left: 5px; }
   .stats .stats__title {
     color: #555252; }
+
+.explore-container {
+  padding-top: 8vh; }
+
+.explore-card {
+  display: flex !important;
+  flex-flow: row !important;
+  max-width: 100%;
+  background: #fff; }
+
+.explore-card__heading {
+  display: flex !important;
+  flex-flow: row nowrap !important;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 380px;
+  height: 68px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  padding: 1rem 0.7rem; }
+
+.explore-card__img {
+  display: flex; }
+
+.explore-card__header {
+  padding-left: 0.8rem;
+  margin: 0;
+  display: inline-block; }
+
+.explore-card__description {
+  padding: 8px 15px;
+  color: #5f5f64; }
+
+.explore-card__comments {
+  margin-left: 0 !important;
+  padding-left: 0 !important; }
+
+.explore-card__icons {
+  margin-top: 15px !important;
+  margin-bottom: 15px !important;
+  margin-left: 0 !important;
+  padding-left: 0 !important; }

@@ -3,10 +3,9 @@ import { Image } from 'semantic-ui-react'
 import logo from '../../images/ma.png'
 
 const Avatar = (props) => (
-
   // will pull data from db/redux
   <>
-    <Image className="card-container__avatar" floated='right' size={props.size || 'small'} avatar centered circular src={props.src || logo} />
+    <Image {...props} inline={props.inline || false} className="card-container__avatar" size={props.size || 'small'} avatar centered circular src={props.src || logo} />
   </>
 )
 
