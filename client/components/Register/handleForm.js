@@ -1,7 +1,7 @@
 const axios = require('axios')
 const paths = require('../../config/paths.js')
 
-const handleForm = (firstName, lastName, password, email) => {
+const handleForm = async (firstName, lastName, password, email) => {
   let validName = isValidName(firstName, lastName)
   if (!validName) throw new TypeError('Name Should Contain Characters Only')
   passwordCheck(password)
@@ -12,8 +12,10 @@ const handleForm = (firstName, lastName, password, email) => {
     password,
     email
   }
-
-  axios.post(paths.register, data)
+  const response = await axios.post(paths.register, data)
+  if (!response.ok) {
+    console.log('error occured in posting... ', response );
+  }
 }
 
 function isValidName(first, last) {

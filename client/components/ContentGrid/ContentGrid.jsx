@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import { Sticky, Grid, Container, Segment } from 'semantic-ui-react'
 import UserFloat from '../UserFloat/UserFloat'
 import CardContainer from '../Card/CardContainer'
@@ -7,33 +8,49 @@ import LoginForm from '../Login/Login'
 
 class ContentGrid extends React.Component {
 
+  constructor() {
+    super()
+    this.handleContextRef = this.handleContextRef.bind(this) 
+    this.state = {}
+  }
+
   static propTypes = {
-    isLogged: PropTypes.bool
+    isLogged: PropTypes.bool,
+    posts: PropTypes.arrayOf(PropTypes.object)
   }
 
   static defaultProps = {
     isLogged: false
   }
 
-  handleContextRef = contextRef => this.setState({ contextRef })
-
+  handleContextRef(contextRef){
+    this.setState({ contextRef })
+  } 
+    
   render() {
-    const { contextRef } = this.state
+    const { posts } = this.props
     return (
       <Grid centered columns={4}>
         <div ref={this.handleContextRef}></div>
         <Grid.Column width={10}>
-            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=1" />
-            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=2" />
-            <CardContainer source="https://source.unsplash.com/random/614x614/?sig=3" />
+          { 
+            posts.map((post, i) => {
+              return <CardContainer
+                caption={post.caption}
+                likes={post.likes}
+                source={post.display_src}
+                comments={post.comments}
+                id={post.id}
+                key={i} />
+            })
+          }
         </Grid.Column>
-
         <Grid.Column width={3}>
-          {/* <Segment style={{marginTop: '40px'}}> */}
-              <Sticky context={ contextRef } style={{marginTop: '40px'}}>
+          <Segment style={{marginTop: '40px'}}>
+              <Sticky context={ this.state.contextRef } style={{marginTop: '40px'}}>
                 <UserFloat />
               </Sticky>
-          {/* </Segment> */}
+          </Segment>
         </Grid.Column>
 
       </Grid>
@@ -41,4 +58,11 @@ class ContentGrid extends React.Component {
   }
 }
 
-export default ContentGrid
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts,
+    comments: state.comments
+  }
+}
+
+export default connect(mapStateToProps)(ContentGrid)

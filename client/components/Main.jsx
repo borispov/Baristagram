@@ -4,8 +4,8 @@ import ContentGrid from './ContentGrid/ContentGrid'
 import ProfilePage from './Profile/ProfilePage'
 import Explore from './Explore/Explore'
 import Login from './Login/Login'
-import { BrowserRouter as Router, Route ,Link } from 'react-router-dom'
 import Register from './Register/Register'
+import { BrowserRouter as Router, Route ,Link } from 'react-router-dom'
 
 const paths = require('../config/paths.js')
 

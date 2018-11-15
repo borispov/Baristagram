@@ -3,15 +3,15 @@ import Avatar from '../Avatar/avatar'
 import { Card, Image, Icon } from 'semantic-ui-react'
 import LazyImage from './Image/LazyImage'
 import Author from './Author'
-import logo from '../../images/ma.png'
+import logo from '../../assets/images/ma.png'
 import CardIcons from './CardIcons'
 import CommentSection from './Comments/CommentSection'
 import CommentBox from './Comments/CommentBox'
+import CommentBoxContainer from './Comments/CommentBoxContainer'
 
 const defaultRandom = 'https://source.unsplash.com/random/614x614'
 
 const CardContainer = (props) => {
-
   return (
     <Card className="card-container">
       <Card.Content>
@@ -25,8 +25,8 @@ const CardContainer = (props) => {
       <Card.Content>
         <CardIcons />
       </Card.Content>
-      <CommentSection className="card-container__comment" />
-      <CommentBox />
+      <CommentSection comments={props.comments} className="card-container__comment" />
+      <CommentBoxContainer postID={props.id} />
     </Card>
   )
 }

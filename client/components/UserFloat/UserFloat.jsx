@@ -4,7 +4,7 @@ import { Item } from 'semantic-ui-react'
 import RegisterFloat from './RegisterFloat'
 
 const UserFloat = (props) => {
-  const isLogged = props.isLogged || false
+  const isLogged = props.isLogged || true
   
   const showUserFloatOrReg = isLogged ?
     ( 

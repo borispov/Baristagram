@@ -1,6 +1,6 @@
 import React from 'react'
 import { Image } from 'semantic-ui-react'
-import logo from '../../images/ma.png'
+import logo from '../../assets/images/ma.png'
 
 const Avatar = (props) => (
   // will pull data from db/redux
