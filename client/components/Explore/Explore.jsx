@@ -16,12 +16,19 @@ class Explore extends React.Component {
     commentsLength: 0
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    if (nextProps.posts) {
-      let cmn = nextProps.posts.map(x => x.comments.length)
-      console.log(cmn)
-      return true
-    }
+  componentDidUpdate(prevProps, prevState) {
+    let len
+    let cComments = this.state.clickedComments
+    let id = this.state.postid
+
+    this.props.posts.find(p => {
+      if (p.id === id) {
+        cComments ? len = cComments.length : len = 0
+        p.comments.length !== len && this.setState((prevState) => ({
+          clickedComments: [...p.comments]
+        }))
+      }
+    })
   }
 
   findCurrent = (id) => {
@@ -34,9 +41,6 @@ class Explore extends React.Component {
         } else {
           this.setState({clickedComments: p.comments})
         }
-        setTimeout(() => {
-          console.log(this.state.clickedComments)
-        }, 1000);
       }
     })
   }
@@ -46,11 +50,6 @@ class Explore extends React.Component {
   clickHandleModal = (e) => {
     let clickedComments
     let postid = e.target.id
-    // posts.find(p => {
-    //   if (p.id === postid) {
-    //     clickedComments = p.comments
-    //   }
-    // })
     this.findCurrent(postid)
     let targetSrc = e.target.src
     this.setState({ isOpen: true, srcForModal: targetSrc, postid})
@@ -58,7 +57,6 @@ class Explore extends React.Component {
 
   render() {
     const { posts } = this.props
-    console.log(posts)
     const images = randomSig(12)
     return (
       <Container className="explore-container">

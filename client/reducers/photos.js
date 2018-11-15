@@ -12,7 +12,6 @@ export function photoReducers(state = [], action){
         if ( post.id !== action.postID) {
           return post
         }
-        console.log(post.id === action.postID)
         return {
           ...post,
           comments: [

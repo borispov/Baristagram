@@ -7,15 +7,11 @@ import CommentSection from '../Card/Comments/CommentSection'
 import CardIcons from '../Card/CardIcons'
 import Author from '../Card/Author'
 
-
-class CardInModal extends React.Component {
-
-  render() {
-    console.log(this.props.posts)
+const CardInModal = (props) => {
 
     return (
       <Modal.Content image>
-      <Image wrapped size='medium' src={this.props.imgsrc} />
+      <Image wrapped size='medium' src={props.imgsrc} />
       <Modal.Description>
         <div className="explore-card__heading">
           <Image 
@@ -24,16 +20,15 @@ class CardInModal extends React.Component {
             src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
             rounded circular
             />
-          <h3 className="explore-card__header">{this.props.author || 'JohnstaGigs'}</h3>
+          <h3 className="explore-card__header">{props.author || 'JohnstaGigs'}</h3>
         </div>
         <p className="explore-card__description">Picture taken from the web, semantic-ui-react, without Filters! lol.</p>
-        <CommentSection comments={this.props.posts} classes="explore-card__comments" />
+        <CommentSection comments={props.posts} classes="explore-card__comments" />
         <CardIcons classes="explore-card__icons" />
-        <CommentBoxContainer postID={'c_3'} />
+        <CommentBoxContainer postID={props.postid} />
       </Modal.Description>
     </Modal.Content>
   )
-  }
 }
 
 export default CardInModal
