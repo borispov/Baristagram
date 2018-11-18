@@ -1,17 +1,21 @@
 import React, { Component } from 'react'
+import Login from './Login/Login'
+import RegisterContainer from './Register/RegisterContainer'
 import MainContainer from './MainContainer'
-import Main from './Main'
+import { BrowserRouter as Router, Route , Switch } from 'react-router-dom'
 
-export class App extends Component {
-
-  render() {
-    const isLogged = this.props.isLogged
-    const showContent = isLogged ?
-     (<MainContainer>
-        <Main />
-      </MainContainer> ) : null
-    return showContent
-  }
+const App = props => {
+  return (
+    <Router>
+      <>
+        <Switch>
+          <Route path={'/login'} component={Login} />
+          <Route path={'/register'} component={RegisterContainer} />
+          <Route component={MainContainer} />
+        </Switch>
+      </>
+    </Router>
+  )
 }
 
 export default App

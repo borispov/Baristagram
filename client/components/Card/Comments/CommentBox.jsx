@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Input } from 'semantic-ui-react'
 import { generateCID } from './generate_cid'
+import { connect } from 'react-redux'
+import PropTypes from 'prop-types'
 
 export class CommentBox extends Component {
   constructor(props){ 
@@ -22,7 +24,7 @@ export class CommentBox extends Component {
       let comID = generateCID(99)
       let postID = this.props.postID
       let comment = String(this.state.inputValue)
-      let currentUsername = this.props.username || 'Johnsta'
+      let currentUsername = this.props.user || 'Johnsta'
       this.props.addComment(currentUsername, postID, comment, comID)
       e.preventDefault()
       this.setState({inputValue: ''}
@@ -38,4 +40,14 @@ export class CommentBox extends Component {
   }
 }
 
-export default CommentBox
+CommentBox.propTypes = {
+  user: PropTypes.string.isRequired
+}
+
+const mapStateToProps = state => {
+  return {
+    user: state.auth.user.name
+  }
+}
+
+export default connect(mapStateToProps)(CommentBox)

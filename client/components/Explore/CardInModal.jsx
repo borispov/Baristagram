@@ -17,12 +17,12 @@ const CardInModal = (props) => {
           <Image 
             className="explore-card__avatar" 
             size="mini"
-            src="https://react.semantic-ui.com/images/avatar/large/rachel.png"
+            src={props.avatar || "https://react.semantic-ui.com/images/avatar/large/rachel.png" }
             rounded circular
             />
           <h3 className="explore-card__header">{props.author || 'JohnstaGigs'}</h3>
         </div>
-        <p className="explore-card__description">Picture taken from the web, semantic-ui-react, without Filters! lol.</p>
+        <p className="explore-card__description">{props.caption || 'Picture taken from the web, semantic-ui-react, without Filters! lol.' }</p>
         <CommentSection comments={props.posts} classes="explore-card__comments" />
         <CardIcons classes="explore-card__icons" />
         <CommentBoxContainer postID={props.postid} />

@@ -1,13 +1,9 @@
 import React from 'react'
-import SearchBar from './SearchBar'
+import { connect } from 'react-redux'
+import { logoutUser } from '../../actions/authentication'
+import { withRouter } from 'react-router-dom'
 import MenuBar from './MenuBar'
 
-const NavbarContainer = (props) => {
-  return (
-    <>
-      <MenuBar />
-    </>
-  )
-}
+const mapStateToProps = (state) => ({auth: state.auth})
 
-export default NavbarContainer
+export default connect(mapStateToProps, { logoutUser })(withRouter(MenuBar))

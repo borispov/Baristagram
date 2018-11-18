@@ -13,42 +13,44 @@ class Explore extends React.Component {
     srcForModal: null,
     postid: null,
     clickedComments: null,
-    commentsLength: 0
+    commentsLength: 0,
+    caption: ''
   }
 
   componentDidUpdate(prevProps, prevState) {
-    let len
-    let cComments = this.state.clickedComments
-    let id = this.state.postid
-
-    this.props.posts.find(p => {
-      if (p.id === id) {
-        cComments ? len = cComments.length : len = 0
-        p.comments.length !== len && this.setState((prevState) => ({
-          clickedComments: [...p.comments]
-        }))
-      }
-    })
+    if (this.state.isOpen ) {
+      let len
+      let cComments = this.state.clickedComments
+      let id = this.state.postid
+      
+      this.props.posts.find(p => {
+        if (p.id === id) {
+          cComments ? len = cComments.length : len = 0
+          p.comments.length !== len && this.setState((prevState) => ({
+            clickedComments: [...p.comments]
+          }))
+        }
+      })
+    }
   }
 
   findCurrent = (id) => {
     posts.find(p => {
       if (p.id === id) {
-        if ( this.state.clickedComments){
+        if (this.state.clickedComments){
           this.setState((prevState) => ({
             clickedComments: [...this.state.clickedComments, p.comments]
           }))
         } else {
-          this.setState({clickedComments: p.comments})
+          this.setState({clickedComments: p.comments, caption: p.caption})
         }
       }
     })
   }
 
-  closeModal = () => this.setState({ isOpen: false})
+  closeModal = () => this.setState({ isOpen: false, clickedComments: null, postid: null, commentsLength: 0, caption: '', srcForModal: null})
 
   clickHandleModal = (e) => {
-    let clickedComments
     let postid = e.target.id
     this.findCurrent(postid)
     let targetSrc = e.target.src
@@ -62,10 +64,10 @@ class Explore extends React.Component {
       <Container className="explore-container">
         <Grid stackable celled centered relaxed columns={3}>
           {
-            posts.map(post => {              
+            posts.map(post => {
               return (
                 <Grid.Column key={post.id}>
-                  <Image post={post} onClick={this.clickHandleModal} src={post.display_src} id={post.id} />
+                  <Image data={String(post.caption)} onClick={this.clickHandleModal} src={post.display_src} id={post.id} />
                 </Grid.Column>
               )
             })
@@ -80,6 +82,7 @@ class Explore extends React.Component {
                 posts={this.state.clickedComments}
                 imgsrc={this.state.srcForModal} 
                 author={''}
+                caption={this.state.caption}
               />
             } 
           />

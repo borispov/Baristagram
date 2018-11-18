@@ -1,31 +1,20 @@
-export function authReducer(state = {}, action) {
-  switch (action.type) {
-    case 'LOGIN_SUCCESS':
-      return {
-        ...state,
-        isFetching: false,
-        isAuthenticated: true,
-        token: action.id_token
-      }
-    case 'LOGIN_REQUEST':
-      return {
-        ...state,
-        isFetching: true,
-        isAuthenticated: false,
-        user: action.creds
-      }
-    case 'LOGIN_FAILURE':
-      return {
-        isFetching: false,
-        isAuthenticated: false,
-        errorMessage: action.message
-      }
-    case 'LOGOUT_SUCCESS':
-      return {
-        isFetching: true,
-        isAuthenticated: false
-      }
-    default:
-      return state
-  }
+import isEmpty from '../../server/validation/is-empty'
+
+const initialState = {
+    isAuthenticated: false,
+    user: {}
+}
+
+export function authReducer(state = initialState, action ) {
+    console.log('inside authReducer')
+    switch(action.type) {
+        case 'SET_CURRENT_USER':
+            return {
+                ...state,
+                isAuthenticated: !isEmpty(action.payload),
+                user: action.payload
+            }
+        default: 
+            return state;
+    }
 }

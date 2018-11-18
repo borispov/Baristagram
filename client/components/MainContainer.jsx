@@ -1,4 +1,3 @@
-import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actionCreators from '../actions/actionCreators'
@@ -6,12 +5,11 @@ import Main from './Main'
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts
+    posts: state.posts,
+    auth: state.auth
   }
 }
 
 const mapDispatchToProps = dispatch => bindActionCreators(actionCreators, dispatch)
 
-const MainContainer = connect(mapStateToProps, mapDispatchToProps)(Main)
-
-export default MainContainer
+export default connect(mapStateToProps, mapDispatchToProps)(Main)
