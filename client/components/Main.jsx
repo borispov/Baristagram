@@ -15,9 +15,19 @@ export class Main extends Component {
     show: false
   }
 
+  componentWillReceiveProps(nextProps) {
+    !nextProps.auth.isAuthenticated && 
+      this.props.history.push('/login')
+    !nextProps.auth.isAuthenticated && 
+      this.setState({ show: false})
+  }
+
   componentDidMount() {
     const isAuth = this.props.auth.isAuthenticated
-    !isAuth ? this.props.history.push('/login') : this.setState({ show: true })
+    !isAuth ? (
+      this.setState({ show: false }),
+      this.props.history.push('/login')
+     ) : this.setState({ show: true })
   }
   
   render() {

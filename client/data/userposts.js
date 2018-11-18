@@ -27,7 +27,7 @@ export const userposts = [
 
   {
     name: "George Aaron",
-    email: "georgeo",
+    email: "geo@mail.com",
     password: "123123",
     UserPosts: [
       {
@@ -47,6 +47,32 @@ export const userposts = [
         display_src: 'https://picsum.photos/614/614/?image=3',
         likes: 11,
         caption: "La Sfipone"
+      }
+    ]
+  },
+
+  {
+    name: "Nocki Liani",
+    email: "lian@mail.com",
+    password: "123123",
+    UserPosts: [
+      {
+        postid: '1126293663140399002',
+        display_src: 'https://picsum.photos/614/614/?image=22',
+        likes: 5,
+        caption: "Children's place"
+      },
+      {
+        postid: '1126293663140399022',
+        display_src: 'https://picsum.photos/614/614/?image=12',
+        likes: 46,
+        caption: "Give a man a fish, and he'll fucking eat it..."
+      },
+      {
+        postid: '1126293663140399032',
+        display_src: 'https://picsum.photos/614/614/?image=2',
+        likes: 11,
+        caption: "Give a man a tool to fish, he'll fucking break it!"
       }
     ]
   }
