@@ -13,8 +13,10 @@ class CommentSection extends Component {
   }
 
   onDelete = (e, i) => {
+    console.log(this.prop)
+    const { postid } = this.props
     console.log(i)
-    this.props.removeComment(null, i)
+    this.props.removeComment(postid, i)
   }
 
   render() {

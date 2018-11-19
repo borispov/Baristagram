@@ -25,7 +25,7 @@ const CardContainer = (props) => {
       <Card.Content>
         <CardIcons />
       </Card.Content>
-      <CommentSection comments={props.comments} className="card-container__comment" />
+      <CommentSection postid={props.id} comments={props.comments} className="card-container__comment" />
       <CommentBoxContainer postID={props.id} />
     </Card>
   )

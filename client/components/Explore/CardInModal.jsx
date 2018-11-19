@@ -23,7 +23,7 @@ const CardInModal = (props) => {
           <h3 className="explore-card__header">{props.author || 'JohnstaGigs'}</h3>
         </div>
         <p className="explore-card__description">{props.caption || 'Picture taken from the web, semantic-ui-react, without Filters! lol.' }</p>
-        <CommentSection comments={props.posts} classes="explore-card__comments" />
+        <CommentSection comments={props.posts} postid={props.postid} classes="explore-card__comments" />
         <CardIcons classes="explore-card__icons" />
         <CommentBoxContainer postID={props.postid} />
       </Modal.Description>

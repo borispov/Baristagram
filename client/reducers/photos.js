@@ -26,21 +26,21 @@ export function photoReducers(state = [], action){
         }
       })
     case 'REMOVE_COMMENT':
+      console.log('--inside REMOVE_COMMENT')
+      console.log('params::::', action)
       return state.map((post, index) => {
         if (post.id !== action.postID) {
           return post
         }
+        console.log(action.postID, action.index)
         return {
           ...post,
           comments: [
             ...post.comments.slice(0, action.index),
-            ...post.comments.slice(action.index)
+            ...post.comments.slice(action.index + 1)
           ]
         }
       })
-
-
-      // let thePost = state.find(post => post.id === action.postID)
 
     case 'ADD_LIKE':
       return state.posts.map((photo) => {
