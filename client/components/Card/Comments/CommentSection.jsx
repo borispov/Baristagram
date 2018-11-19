@@ -2,12 +2,19 @@ import React, { Component } from 'react'
 import { Comment } from 'semantic-ui-react'
 import logo from '../../../assets/images/ma.png'
 import PropTypes from 'prop-types'
+import { connect } from "react-redux"
+import { removeComment } from '../../../actions/actionCreators';
 
 class CommentSection extends Component {
 
   static propTypes = {
     classes: PropTypes.string,
     comments: PropTypes.arrayOf(PropTypes.object)
+  }
+
+  onDelete = (e, i) => {
+    console.log(i)
+    this.props.removeComment(null, i)
   }
 
   render() {
@@ -21,7 +28,7 @@ class CommentSection extends Component {
               <Comment.Metadata>
                 <div className="comment__time">{this.props.time || 'Today at 05:49PM'}</div>
               </Comment.Metadata>
-              <Comment.Text>{com.comment}</Comment.Text>
+              <Comment.Text onClick={(e) => this.onDelete(e, i)} >{com.comment}</Comment.Text>
             </Comment>
           })
         }
@@ -30,4 +37,6 @@ class CommentSection extends Component {
   }
 }
 
-export default CommentSection
+
+
+export default connect(null, { removeComment })(CommentSection)
