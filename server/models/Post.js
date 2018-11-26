@@ -10,10 +10,6 @@ const CommentSchema = new Schema({
     type: String,
     required: true
   },
-  id: {
-    type: String,
-    default: Date.now
-  },
   date: {
     type: Date,
     default: Date.now
@@ -25,24 +21,33 @@ const PostSchema = new Schema({
     type: String,
     required: true
   },
-  display_src: {
+  image: {
+    data: Buffer,
+    contentType: String
+  },
+  // display_src: {
+  //   type: String,
+  //   required: true
+  // },
+  userid: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   author: {
     type: String,
     required: true
   },
   caption: {
-    type: String,
-    required: true
+    type: String
+  },
+  date: {
+    type: Date,
+    default: Date.now
   },
   comments: [CommentSchema]
 })
 
-const Post = mongoose.model("Post", PostSchema)
+const Post = mongoose.model("posts", PostSchema)
 
-module.exports = {
-  Post,
-  CommentSchema
-}
+module.exports = Post

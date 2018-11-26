@@ -1,5 +1,3 @@
-import { bindActionCreators } from "../../../../../../Library/Caches/typescript/3.1/node_modules/redux";
-
 export const addLike = (index) => {
   return {
     type: 'ADD_LIKE',
@@ -25,10 +23,11 @@ export const removeComment = (postID, index) => {
   }
 }
 
-export const addPhoto = (id, display_src, caption) => {
+export const addPhoto = (user_id, postid, display_src, caption) => {
   return {
     type: 'ADD_PHOTO',
-    id,
+    user_id,
+    postid,
     display_src,
     caption
   }
