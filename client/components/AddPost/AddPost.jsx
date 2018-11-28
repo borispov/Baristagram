@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { Button, Container, Segment, Form, Header, Label, Icon, Image } from 'semantic-ui-react'
 import axios from 'axios'
-
+import postForm from './postForm'
 
 
 class AddPost extends Component {
@@ -48,15 +48,17 @@ class AddPost extends Component {
     }, 2500);
   }
 
-  onPostSubmit = (e) => {
-    const data = new FormData()
+  onPostSubmit = async (e) => {
+    e.preventDefault()
+
     const { fileSelected, caption } = this.state
     const { user_id, username } = this.props
-
-    data.append('caption', caption)
-    data.append('userid', user_id)
-    data.append('username', username)
-    data.append('file', fileSelected, fileSelected.name)
+    
+    let data = await postForm(fileSelected, {user_id, username}, caption)
+    // data.append('caption', caption)
+    // data.append('userid', user_id)
+    // data.append('username', username)
+    // data.append('file', fileSelected, fileSelected.name)
     axios.post('/api/addPhoto', data, {
       onUploadProgress: progressEvent => {
         let percentage = Math.round( (progressEvent.loaded * 100) / progressEvent.total)
@@ -65,7 +67,6 @@ class AddPost extends Component {
     })
       .then(res => {console.log(res.statusText)})
       .catch(err => console.log(err))
-    e.preventDefault()
   }
 
   render() {
@@ -95,28 +96,8 @@ class AddPost extends Component {
             { this.state.fileload === 100 && <Icon size="large" name='checkmark' />}
             {
               this.state.imgData !== null && 
-                <Image centered bordered circular rounded src={this.state.imgData} alt='youruploaded' width='360' height='360' />
+                <Image centered circular rounded src={this.state.imgData} alt='youruploaded' width='360' height='360' />
             }
-            
-
-
-            {/* <Label
-              as="label"
-              // basic
-              htmlFor="upload" >
-              <Button
-                icon="add"
-                size="large"
-                label={{basic: false}}
-                labelPosition="right"
-              />
-              <input type="file" encType="m
-            ultipart/form-data" id="upload" name="upload" onChange={this.handleSelected} hidden />
-              { this.state.loading && <Icon loading name='spinner' /> }
-              { this.state.fileload === 100 && <Icon name='checkmark' />}
-              { !this.state.fileload === 100 ? <Icon loading name='spinner' /> : <Icon name='checkmark' /> }
-            </Label>
-              { this.state.fileSelected && <img src={`data:image/${x};base64, ${this.state.fileSelected.data.toString('base64')}`} />} */}
           </Form.Field>
           <Header as="h3">Add Photo</Header>
           <Form.Field>

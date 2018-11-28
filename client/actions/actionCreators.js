@@ -23,12 +23,11 @@ export const removeComment = (postID, index) => {
   }
 }
 
-export const addPhoto = (user_id, postid, display_src, caption) => {
+export const addPhoto = (user_id, postid, caption) => {
   return {
     type: 'ADD_PHOTO',
     user_id,
     postid,
-    display_src,
     caption
   }
 }

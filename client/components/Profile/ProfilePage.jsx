@@ -4,7 +4,7 @@ import ProfileImg from './ProfileImg/ProfileImg'
 import Gallery from './Gallery/Gallery'
 import Stats from './Settings/Stats'
 
-const ProfilePage = () => {
+const ProfilePage = (props) => {
 
   const profilePageStyle = {
     paddingTop: '80px',
@@ -40,7 +40,7 @@ const ProfilePage = () => {
         </Grid>
       </div>
 
-      <Gallery />
+      <Gallery username={props.username} />
     </div>
   )
 }

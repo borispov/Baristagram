@@ -17,18 +17,14 @@ const CommentSchema = new Schema({
 })
 
 const PostSchema = new Schema({
-  postid: {
-    type: String,
-    required: true
-  },
+  // postid: {
+  //   type: String,
+  //   required: true
+  // },
   image: {
     data: Buffer,
     contentType: String
   },
-  // display_src: {
-  //   type: String,
-  //   required: true
-  // },
   userid: {
     type: String,
     required: true,

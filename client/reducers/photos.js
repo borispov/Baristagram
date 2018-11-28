@@ -1,9 +1,13 @@
 export function photoReducers(state = [], action){
   switch (action.type) {
+
+    case 'ADD_PHOTO':
+      return 
+
     case 'ADD_PHOTO':
       return state.concat([{
         id: action.id,
-        src: action.display_src,
+        image: action.image,
         likes: 0,
         caption: action.caption
       }])

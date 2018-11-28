@@ -1,8 +1,9 @@
 const path = require('path')
 const HtmlWebPackPlugin = require('html-webpack-plugin')
+require('babel-polyfill')
 
 module.exports = {
-  entry: './client/index.js',
+  entry: ['babel-polyfill', './client/index.js'],
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "bundle.js"

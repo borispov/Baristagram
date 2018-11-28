@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Navbar from './Navbar/NavbarContainer'
 import ContentGrid from './ContentGrid/ContentGrid'
 import ProfilePage from './Profile/ProfilePage'
+import ProfileContainer from './Profile/ProfileContainer'
 import Explore from './Explore/Explore'
 import { BrowserRouter as Router, Route ,Link } from 'react-router-dom'
 import { withRouter } from 'react-router-dom'
@@ -39,7 +40,7 @@ export class Main extends Component {
             <div>
             <Navbar />
             <Route path={paths.root} exact component={ContentGrid} />
-            <Route path={paths.profile_page} component={ProfilePage} />
+            <Route path={paths.profile_page} component={ProfileContainer} />
             <Route path={paths.explore} component={Explore} />
             <Route path='/post' component={AddPostContainer} />
             {/* <Route path={paths.login} component={Login} /> */}
