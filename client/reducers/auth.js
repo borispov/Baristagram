@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export function authReducer(state = initialState, action ) {
-    console.log('inside authReducer')
     switch(action.type) {
         case 'SET_CURRENT_USER':
             return {

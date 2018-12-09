@@ -1,8 +1,22 @@
+import { 
+  FETCH_PHOTOS_SUCCESS
+} from '../actions/fetchPosts'
+ 
 export function photoReducers(state = [], action){
   switch (action.type) {
+    
+    case 'POST_PHOTO_SUCCESS':
+      return [
+        ...state,
+        action.payload
+      ]
 
-    case 'ADD_PHOTO':
-      return 
+    case FETCH_PHOTOS_SUCCESS:
+      console.log(action.data)
+      return [
+        ...state,
+        ...action.data
+      ]
 
     case 'ADD_PHOTO':
       return state.concat([{
@@ -11,27 +25,28 @@ export function photoReducers(state = [], action){
         likes: 0,
         caption: action.caption
       }])
+
     case 'ADD_COMMENT':
       return state.map((post, index) => {
-        if ( post.id !== action.postID) {
+        if ( post._id !== action.postID) {
           return post
         }
+        console.log('----it\'s down here, come on')
         return {
           ...post,
           comments: [
             ...post.comments,
             {
               author: action.author,
-              postID: action.postID,
               comment: action.comment,
-              comID: action.comID
+              _id: action.postID,
             }
           ]
         }
       })
+
     case 'REMOVE_COMMENT':
       console.log('--inside REMOVE_COMMENT')
-      console.log('params::::', action)
       return state.map((post, index) => {
         if (post.id !== action.postID) {
           return post

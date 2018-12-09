@@ -22,13 +22,13 @@ const PostSchema = new Schema({
   //   required: true
   // },
   image: {
+    pathToFile: String,
     data: Buffer,
     contentType: String
   },
   userid: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   },
   author: {
     type: String,
@@ -36,6 +36,10 @@ const PostSchema = new Schema({
   },
   caption: {
     type: String
+  },
+  likes: {
+    type: Number,
+    default: 0
   },
   date: {
     type: Date,

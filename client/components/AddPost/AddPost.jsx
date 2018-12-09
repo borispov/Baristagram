@@ -1,10 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
-import { Button, Container, Segment, Form, Header, Label, Icon, Image } from 'semantic-ui-react'
+import { Button, Container, Grid, Form, Header, Icon, Image } from 'semantic-ui-react'
 import axios from 'axios'
 import postForm from './postForm'
+import { postImages } from '../../actions/fetchPosts'
 
+// TODO
+// clearState after upload
+// display success/error message when uploading. 
+// clearState if successful, otherwise display error.
+
+// TODO :: Check if File is image
 
 class AddPost extends Component {
   constructor(){
@@ -13,12 +20,12 @@ class AddPost extends Component {
   
   state = {
     caption: '',
-    date: null,
     fileload: 0,
     selectedImage: null,
     loading: false,
     mimetype: null,
-    imgData: null
+    imgData: null,
+    error: null
   }
 
   handleInputChange = e => {
@@ -30,49 +37,68 @@ class AddPost extends Component {
 
   clearState = () => {
     this.setState({
-      caption: '', date: null, fileupload: 0, selectedImage: null
+      caption: '',  
+      fileload: 0, 
+      selectedImage: null,
+      mimetype: null,
+      imgData: null,
+      error: null
     })
   }
 
-  handleSelected = e => {
+  handleSelected = (e) => {
     e.preventDefault()
-    console.log('--- hello from handleSelected!')
     const fileSelected = e.target.files[0]
     const loaded = 0
     this.setState({ loading: true})
     
     let reader = new FileReader()
     reader.readAsDataURL(fileSelected)
+    if (fileSelected.type.split('/')[0] != 'image') {
+      this.setState({ error: 'Only Image Uploads Allowed!', loading: false})
+      return null
+    }
     setTimeout(() => {
       this.setState({ fileSelected, loaded, mimetype: fileSelected.type, imgData: reader.result, loading: false})
-    }, 2500);
+    }, 1500)
+  }
+
+  componentWillUnmount() {
+    this.clearState()
   }
 
   onPostSubmit = async (e) => {
-    e.preventDefault()
 
+    e.preventDefault()
     const { fileSelected, caption } = this.state
     const { user_id, username } = this.props
-    
     let data = await postForm(fileSelected, {user_id, username}, caption)
-    // data.append('caption', caption)
-    // data.append('userid', user_id)
-    // data.append('username', username)
-    // data.append('file', fileSelected, fileSelected.name)
-    axios.post('/api/addPhoto', data, {
-      onUploadProgress: progressEvent => {
-        let percentage = Math.round( (progressEvent.loaded * 100) / progressEvent.total)
-        console.log(percentage)
+    await this.props.dispatch(postImages(data))
+
+    setTimeout(() => {
+      if (!Object.keys(this.props.errors).length) {
+        this.props.history.push('/profile')
+      } else {
+        this.setState({ error: this.props.errors })
       }
-    })
-      .then(res => {console.log(res.statusText)})
-      .catch(err => console.log(err))
+    }, 1250)
   }
 
   render() {
-    return (
-      <Container style={{paddingTop: '8vh'}}>
-        <form style={{textAlign: 'center'}} onSubmit={this.onPostSubmit} encType="multipart/form-data">
+
+    const loaderCheck = (this.state.loading || this.props.loader) && <Icon size="large" loading name='spinner'/>
+
+    const errorCheck = this.state.error && <Header as='h3'>{this.state.error}</Header>
+
+    const showLoadedImage = this.state.imgData !== null && 
+    <Image centered circular rounded src={this.state.imgData} alt='youruploaded' width='360' height='360' />
+
+    const showGridColumns = (
+      <>
+        <Grid.Column 
+          style={{minHeight: '380px', margin: '0'}} 
+          verticalAlign="middle" 
+          textAlign="center">
           <Header>Share Your Moment</Header>
           <Form.Field>
             <Form.Input
@@ -81,27 +107,55 @@ class AddPost extends Component {
               placeholder="Describe your moment..."
             />
           </Form.Field>
-          <Form.Field>
+          </Grid.Column>
+      
+          <Grid.Column style={{minHeight: '380px'}}>
+            <Form.Field>
+              <label htmlFor="upload">
+                <Icon size="huge" name="add" style={{cursor: 'pointer'}}/>
+              </label>
+              <input 
+                type="file" 
+                encType="multipart/form-data" 
+                id="upload" 
+                name="upload" 
+                onChange={this.handleSelected} 
+                hidden 
+              />
+            </Form.Field>
+            <Form.Field>{showLoadedImage && showLoadedImage}</Form.Field>
+            <Form.Field>{loaderCheck && loaderCheck}</Form.Field>
+            <Form.Field>{errorCheck && errorCheck}</Form.Field>
 
-            <label htmlFor="upload">
-              <Icon size="huge" name="add" style={{cursor: 'pointer'}}/>
-            </label>
-            <input type="file" encType="multipart/form-data" id="upload" name="upload" onChange={this.handleSelected} hidden />
-            
-            { this.state.loading &&
-                <div>
-                  <Icon size="large" loading name='spinner' />
-                </div>
-            }
-            { this.state.fileload === 100 && <Icon size="large" name='checkmark' />}
             {
-              this.state.imgData !== null && 
-                <Image centered circular rounded src={this.state.imgData} alt='youruploaded' width='360' height='360' />
+              !showLoadedImage &&
+                <Header as="h3">Add Photo</Header> 
             }
-          </Form.Field>
-          <Header as="h3">Add Photo</Header>
+          </Grid.Column>
+        </>
+    )
+
+    const grid = (
+      <>
+        <Grid stackable columns={2} divided padded="vertically" divided>
+          {showGridColumns}
+        </Grid>
+      </>
+    )
+
+    return (
+      <Container style={{paddingTop: '8vh'}}>
+        <form style={{textAlign: 'center'}} onSubmit={this.onPostSubmit} encType="multipart/form-data">
+          {!this.props.loader ? grid : (
+            <Icon size="huge" loading name='spinner'/>
+          )}
           <Form.Field>
-            <Button color="instagram" compact={true} style={{paddingTop: '10px', marginTop: '10px', width: '250px'}}  type='submit'> Upload </Button>
+            <Button 
+              color="instagram" 
+              compact={true} 
+              style={{paddingTop: '10px', marginTop: '10px', width: '250px'}}  
+              type='submit'> Upload 
+            </Button>
           </Form.Field>
         </form>
       </Container>
@@ -109,4 +163,10 @@ class AddPost extends Component {
   }
 }
 
-export default AddPost
+const mapStateToProps = state => ({
+  errors: state.errors,
+  loader: state.loader.loading
+})
+
+
+export default connect(mapStateToProps)(AddPost)

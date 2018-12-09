@@ -3,7 +3,8 @@ const initialState = {};
 export function errorReducer(state = initialState, action ) {
     switch(action.type) {
         case 'GET_ERRORS':
-            return action.payload;
+            console.log(action.payload)
+            return action.payload.toString()
         default: 
             return state;
     }

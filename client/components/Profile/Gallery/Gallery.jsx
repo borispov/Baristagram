@@ -13,14 +13,19 @@ class Gallery extends React.Component {
   async componentDidMount(){
     const { username } = this.props
     const getData = await this.getProfileImage(username)
-    const posts = getData.data.map(i => ({type: i.image.contentType, data: i.image.data}) )
+    const posts = getData.map(i => ({path: i.image.pathToFile}))
+    // ,type: i.image.contentType, data: i.image.data
+    // const images = await posts.map(img => img.path)
+    // console.log(images)
+    // let type = posts.image.contentType.split('/')
     this.setState({ posts })
   }
 
   getProfileImage = async (name) => {
-    console.log(name)
     return await axios.get(`/api/getProfile/${name}`)
-      .then(res => res)
+      .then(res => {
+        return res.data
+      })
       .catch(err => console.error(err))
   }
 
@@ -31,7 +36,7 @@ class Gallery extends React.Component {
         <Grid stackable celled centered relaxed columns={3}>
           {
             posts && posts.map((eachPost, i) => {
-              let src = `data:${eachPost.type};base64,${eachPost.data}`
+              let src = eachPost.path || `data:${eachPost.type};base64,${eachPost.data}`
               return (
                 <Grid.Column key={i}>
                   <Image src={src} />

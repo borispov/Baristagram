@@ -19,6 +19,9 @@ module.exports = {
       { test: /\.jpg$/, use: 'url-loader'},
     ]
   },
+  node: {
+    fs: "empty"
+ },
   mode: 'development',
   plugins: [
     new HtmlWebPackPlugin({

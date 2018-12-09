@@ -12,7 +12,7 @@ class MenuBar extends React.Component {
   }
 
   render() {
-    console.log(this.props.auth)
+    // console.log(this.props.auth)
     const { isAuthenticated, user } = this.props.auth
     return (
       <div>

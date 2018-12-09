@@ -1,3 +1,5 @@
+import axios from 'axios'
+
 export const addLike = (index) => {
   return {
     type: 'ADD_LIKE',
@@ -5,14 +7,39 @@ export const addLike = (index) => {
   }
 }
 
-export const addComment = (author, postID, comment, comID) => {
+export const addComment = (author, postID, comment) => dispatch => {
+  const data = {
+    author,
+    postID,
+    comment
+  }
+  axios.post('/api/addComment', data)
+    .then(res => {
+      if (res.statusText) {
+        dispatch(addCommentSuccess(res.data))
+        return res.data
+      }
+    })
+    .catch(err => console.log('cant add comment', err))
+}
+
+export const addCommentSuccess = data => {
   return {
     type: 'ADD_COMMENT',
-    author, 
-    postID,
-    comment,
-    comID
+    author: data.author,
+    postID: data.postID,
+    comment: data.comment
   }
+}
+
+export const remComment = (postID, index) => dispatch => {
+  const data = { postID, index }
+  axios.post('/api/removeComment', data)
+    .then(response => {
+      dispatch(removeComment(postID, index))
+      return response
+    })
+    .catch(err = console.error('- rmComment failed -', err))
 }
 
 export const removeComment = (postID, index) => {
@@ -24,6 +51,7 @@ export const removeComment = (postID, index) => {
 }
 
 export const addPhoto = (user_id, postid, caption) => {
+  dispatch
   return {
     type: 'ADD_PHOTO',
     user_id,
@@ -31,6 +59,7 @@ export const addPhoto = (user_id, postid, caption) => {
     caption
   }
 }
+
 
 // Auth Actions !! 
 export const loginRequest = (creds) => {

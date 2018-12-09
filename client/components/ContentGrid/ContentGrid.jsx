@@ -1,17 +1,27 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Sticky, Grid, Container, Segment } from 'semantic-ui-react'
+import { Header, Sticky, Grid, Container, Segment, Icon } from 'semantic-ui-react'
 import UserFloat from '../UserFloat/UserFloat'
 import CardContainer from '../Card/CardContainer'
 import PropTypes from 'prop-types'
 import LoginForm from '../Login/Login'
+import { Link } from 'react-router-dom'
+import { fetchImages } from '../../actions/fetchPosts'
 
 class ContentGrid extends React.Component {
 
   constructor() {
     super()
     this.handleContextRef = this.handleContextRef.bind(this) 
-    this.state = {}
+    this.state = {
+      posts: [],
+      error: null,
+      loading: false
+    }
+  }
+
+  async componentDidMount() {
+    this.props.dispatch(fetchImages())
   }
 
   static propTypes = {
@@ -34,23 +44,31 @@ class ContentGrid extends React.Component {
         <div ref={this.handleContextRef}></div>
         <Grid.Column width={10}>
           { 
-            posts.map((post, i) => {
-              return <CardContainer
-                caption={post.caption}
-                likes={post.likes}
-                source={post.display_src}
-                comments={post.comments}
-                id={post.id}
-                key={i} />
-            })
+            posts && 
+              posts.map((post, i) => {
+                return <CardContainer
+                  caption={post.caption}
+                  likes={post.likes}
+                  source={post.image.pathToFile}
+                  comments={post.comments}
+                  id={post._id}
+                  key={i} />
+              })
           }
+          
         </Grid.Column>
         <Grid.Column width={3}>
-          <Segment style={{marginTop: '40px'}}>
-              <Sticky context={ this.state.contextRef } style={{marginTop: '40px'}}>
-                <UserFloat />
-              </Sticky>
-          </Segment>
+          <Sticky context={ this.state.contextRef } style={{marginTop: '40px'}}>
+            <Segment style={{marginTop: '40px'}}>
+              <UserFloat />
+            </Segment>
+            <Segment style={{marginTop: '2px'}} vertical>
+              <Link to="/post" style={{textAlign: 'center', margin: '0 auto !important', display: 'block'}} >
+                <Icon color="purple" name="camera" size="large" style={{cursor: 'pointer', display: 'inline-block', margin: '0 5px'}}/>
+                <Header style={{margin: '0 5px', cursor: 'pointer', display: 'inline-block'}}>Add Photo</Header>
+              </Link>
+            </Segment>
+          </Sticky>
         </Grid.Column>
 
       </Grid>

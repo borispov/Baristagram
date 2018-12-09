@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import { Input } from 'semantic-ui-react'
-import { generateCID } from './generate_cid'
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { addComment } from "../../../actions/actionCreators"
 
 export class CommentBox extends Component {
   constructor(props){ 
@@ -21,11 +22,10 @@ export class CommentBox extends Component {
 
   handleSubmit(e){ 
     if (e.key === 'Enter') {
-      let comID = generateCID(99)
       let postID = this.props.postID
       let comment = String(this.state.inputValue)
       let currentUsername = this.props.user || 'Johnsta'
-      this.props.addComment(currentUsername, postID, comment, comID)
+      this.props.dispatch(addComment(currentUsername, postID, comment))
       e.preventDefault()
       this.setState({inputValue: ''}
       )
@@ -33,6 +33,7 @@ export class CommentBox extends Component {
   }
 
   render() {
+    console.log(this.props)
     return (
       <Input onKeyUp={(e) => this.handleSubmit(e)} onChange={(e) => this.handleChange(e)} value={this.state.inputValue} className="comment-box" placeholder="Add a comment ...">
       </Input>

@@ -16,10 +16,12 @@ app.use(fileUpload())
 app.use(passport.initialize())
 require('./passport')(passport)
 
+// Routes
 app.use('/', users, posts)
 
 app.use(express.json()) 
 app.use(express.static(path.join(__dirname, ".." , "dist")))
+app.use(express.static(path.join(__dirname, '..', 'public')))
 
 
 app.all('*', (req, res) => {
