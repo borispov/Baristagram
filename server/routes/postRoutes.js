@@ -2,10 +2,13 @@ const express = require('express')
 const router = express.Router()
 const path = require('path')
 const postService = require('../services')
+const mongoose = require('mongoose')
 
 const Post = require('../models/Post')
 
 const BASE64 = 'base64'
+
+mongoose.set('useFindAndModify', false);
 
 router.post('/api/addphoto', async (req, res, next) => {
 
@@ -36,7 +39,7 @@ router.get('/api/getProfile/:user', (req, res, next) => {
 })
 
 router.get('/api/fetchPhotos', (req, res, next) => {
-  console.log('hiiii fetcher')
+  console.log('Fetching Photos')
   Post.find({}).sort('-date').limit(10)
     .then(data => {
       return res.json(data)
@@ -48,18 +51,17 @@ router.post('/api/addComment', (req, res, next) => {
   console.log('Adding A Comment to Post in DB')
   const message = { author, comment } = req.body
 
-  // Experimenting with $push mongo command.. trying to update a certain field within the Database. 
   Post.findOneAndUpdate({_id: req.body.postID}, {$push: {comments: message}})
   .then(posts => res.json(req.body))
   .catch(err=> err)
 })
 
-router.post('api/removeComment', (req, res, next) => {
+router.post('/api/removeComment', (req, res, next) => {
   console.log('---removing comment---')
-  const {postID, index} = req.body
-
-  Post.findOneAndDelete({_id})
-
+  const {postID, comID} = req.body
+  Post.updateOne({_id: postID}, {$pull: {"comments": { _id: comID} }})
+    .then(data => res.json(data))
+    .catch(error => console.log('error has happened:  ', err))
 })
 
 module.exports = router

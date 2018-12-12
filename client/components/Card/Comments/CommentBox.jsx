@@ -33,7 +33,7 @@ export class CommentBox extends Component {
   }
 
   render() {
-    console.log(this.props)
+    // console.log(this.props)
     return (
       <Input onKeyUp={(e) => this.handleSubmit(e)} onChange={(e) => this.handleChange(e)} value={this.state.inputValue} className="comment-box" placeholder="Add a comment ...">
       </Input>

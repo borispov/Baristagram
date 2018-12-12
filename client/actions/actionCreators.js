@@ -32,14 +32,18 @@ export const addCommentSuccess = data => {
   }
 }
 
-export const remComment = (postID, index) => dispatch => {
-  const data = { postID, index }
+export const remComment = (postID, index, comID) => dispatch => {
+  const data = { postID, comID }
   axios.post('/api/removeComment', data)
-    .then(response => {
-      dispatch(removeComment(postID, index))
-      return response
+    .then(res => {
+      if (res.statusText) {
+
+        console.log(index)
+        dispatch(removeComment(postID, index))
+        return res
+      }
     })
-    .catch(err = console.error('- rmComment failed -', err))
+    .catch(err => console.error('- rmComment failed -', err))
 }
 
 export const removeComment = (postID, index) => {

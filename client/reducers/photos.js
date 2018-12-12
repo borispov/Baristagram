@@ -48,10 +48,9 @@ export function photoReducers(state = [], action){
     case 'REMOVE_COMMENT':
       console.log('--inside REMOVE_COMMENT')
       return state.map((post, index) => {
-        if (post.id !== action.postID) {
+        if (post._id !== action.postID) {
           return post
         }
-        console.log(action.postID, action.index)
         return {
           ...post,
           comments: [
