@@ -2,7 +2,6 @@ const https = require('https')
 const app = require('./server/app')
 const mongoose = require('mongoose')
 const db = require('./server/config/key').DB
-const User = require('./server/models/User')
 
 mongoose.connect(db, { useNewUrlParser: true })
   .then(() => console.log('db connected'))

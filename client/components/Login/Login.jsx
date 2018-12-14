@@ -49,10 +49,13 @@ class Login extends Component {
         <style>
           {`
             body > div, body > div > div, body > div > div > div.login-form {
-            height: 100%;
+            height: 80%;
           }`}
         </style>
-      <Grid textAlign='center' style={{ height: '100%', paddingTop: '11vh'}} verticalAlign="middle">
+        <Header textAlign='center' size='huge'>
+          Login to Baristagram
+        </Header>
+      <Grid textAlign='center' style={{ height: '100%', paddingTop: '1vh'}} verticalAlign="middle">
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as='h2' color='teal' textAlign='center'>
             {/* <Image src='/logo.png' /> Log-in to your account */}

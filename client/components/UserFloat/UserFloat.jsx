@@ -2,17 +2,18 @@ import React from 'react'
 import Avatar from '../Avatar/avatar'
 import { Item, Icon, Container } from 'semantic-ui-react'
 import RegisterFloat from './RegisterFloat'
+import { connect } from 'react-redux'
 
 const UserFloat = (props) => {
-  const isLogged = props.isLogged || true
+  const isLogged = props.userAuth.isAuthenticated
   
   const showUserFloatOrReg = isLogged ?
     ( 
       <>
         <Item.Image size="tiny"><Avatar className="userfloat__avatar" /></Item.Image>
           <Item.Content verticalAlign='middle'>
-            <Item.Header as="a">Johnsta</Item.Header>
-            <Item.Meta>Johnsta Proshlow</Item.Meta>
+            <Item.Header as="a">{props.userAuth.user.name.split(' ')[0]}</Item.Header>
+            <Item.Meta>{props.userAuth.user.name}</Item.Meta>
         </Item.Content>
       </>
     ) : <RegisterFloat />
@@ -26,4 +27,6 @@ const UserFloat = (props) => {
   )
 }
 
-export default UserFloat
+const mapStateToProps = state => ( {userAuth: state.auth} )
+
+export default connect(mapStateToProps)(UserFloat)

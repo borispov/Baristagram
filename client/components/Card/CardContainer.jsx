@@ -18,7 +18,7 @@ const CardContainer = (props) => {
         <div className="card-container__heading">
           <Avatar className="card-container__avatar" floated="left" size="large" />
           {/* <Card.Header className="card-container__header" >{props.author || 'JonhstaGigs'}</Card.Header> */}
-          <Author className="card-container__header"/>
+          <Author author={props.author} className="card-container__header"/>
         </div> 
       </Card.Content>
       <LazyImage className="card-container__img" src={props.source || defaultRandom} rounded/>

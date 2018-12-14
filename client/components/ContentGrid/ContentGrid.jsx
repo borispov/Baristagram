@@ -48,6 +48,7 @@ class ContentGrid extends React.Component {
               posts.map((post, i) => {
                 return <CardContainer
                   caption={post.caption}
+                  author={post.author}
                   likes={post.likes}
                   source={post.image.pathToFile}
                   comments={post.comments}
