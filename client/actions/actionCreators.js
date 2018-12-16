@@ -10,6 +10,7 @@ export const sendLikeToDB = (postID, userLiking) => dispatch => {
     .then(res => {
       console.log(res.statusText)
       if(res.statusText) {
+        console.log('-res-is-ok')
         dispatch(addLike(postID, userLiking))
         return res
       }

@@ -20,7 +20,7 @@ export function photoReducers(state = [], action){
 
     case 'ADD_PHOTO':
       return state.concat([{
-        id: action.id,
+        _id: action.id,
         image: action.image,
         likes: 0,
         caption: action.caption
@@ -62,18 +62,18 @@ export function photoReducers(state = [], action){
 
     case 'ADD_LIKE':
       return state.map((photo) => {
-        if (action.id !== photo.id) return photo
+        if (action.id !== photo._id) return photo
         let user = action.user
         return {
           ...photo,
-          likeList: [...likeList, user],
-          likes: likes++
+          likeList: [...photo.likeList, user],
+          likes: photo.likes++
         }
       })
 
     case 'REMOVE_LIKE':
       return state.map(p => {
-        if (action.id !== p.id) return p
+        if (action.id !== p._id) return p
         let indexOfUser = p.like.indexOf(action.user)
         return {
           ...p,

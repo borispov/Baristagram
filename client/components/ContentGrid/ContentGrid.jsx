@@ -49,6 +49,7 @@ class ContentGrid extends React.Component {
                 return <CardContainer
                   caption={post.caption}
                   author={post.author}
+                  likeList={post.likeList}
                   likes={post.likes}
                   source={post.image.pathToFile}
                   comments={post.comments}

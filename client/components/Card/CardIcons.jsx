@@ -1,13 +1,20 @@
 import React from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Icon, Transition } from 'semantic-ui-react'
 
 const CardIcons = (props) => {
+
   // if classes prop exist, assign it to classes variable. 
-  const showLikes = props.likes > 0 ? props.likes : ''
   const classes = props.classes ? props.classes : ''
+
+  const isLiked = props.isLiked ? 'like' : 'heart outline'
+  console.log(props.isLiked)
+
+  const showLikes = props.likes > 0 ? props.likes : ''
   return (
     <div className={`card__icon-container ${classes && classes}`} >
-      <Icon size="large" className="card__icon" name="like"></Icon>
+      <Transition duration={200}>
+        <Icon size="large" className="card__icon" name={isLiked}></Icon>
+      </Transition>
       <span style={{color: 'lightgrey'}} >{showLikes}</span>
       <Icon size="large" className="card__icon" name="comment outline"></Icon>
     </div>

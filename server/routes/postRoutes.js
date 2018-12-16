@@ -87,19 +87,17 @@ router.post('/api/addLike', (req, res, next) => {
   console.log('-----likin a photo Yo!')
   const { postID, userLiking } = req.body
 
+  // TODO export all this functionality to a POSTS Service class. ALL GET/POSTS/PUT/ETC requests
   const conditions = {
     _id: postID,
-    likeList: {$ne: 'LoLkity!!!'}
+    likeList: {$ne: userLiking}
   }
 
   const theUpdate = {
     $inc: {likes: 1}, 
-    $push: {likeList: 'LoLkity!'} 
+    $push: {likeList: userLiking } 
   }
-
-  console.log(conditions)
-  console.log('--------------')
-  console.log(theUpdate)
+  
   Post.findOneAndUpdate(conditions, theUpdate, (err, doc) => {
     if (err) {
       console.log(`error occured in query: : : ${err}`)
@@ -107,16 +105,9 @@ router.post('/api/addLike', (req, res, next) => {
     } else if (doc === null) {
       return res.status(204).json('perhaps already liked by user')
     }
+    console.log('-- LIKE success -- !')
     return res.status(200).json(doc)
   })
-    // .then(resp => {
-    //   console.log(resp)
-    //   return res.json(resp)
-    // })
-    // .catch(err => {
-    //   console.log('caught an error: ', err)
-    //   res.json(err)
-    // })
 
 })
 
