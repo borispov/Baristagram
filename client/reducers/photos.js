@@ -61,24 +61,28 @@ export function photoReducers(state = [], action){
       })
 
     case 'ADD_LIKE':
-      return state.posts.map((photo) => {
-        if (action.id === photo.id) {
-          return {
-            ...photo,
-            likes: likes++
-          }
+      return state.map((photo) => {
+        if (action.id !== photo.id) return photo
+        let user = action.user
+        return {
+          ...photo,
+          likeList: [...likeList, user],
+          likes: likes++
         }
       })
 
-    // case 'REMOVE_LIKE':
-    //   return state.posts.map(p => {
-    //     if (action.id === p.id) {
-    //       return {
-    //         ...p,
-    //         likes: likes--
-    //       }
-    //     }
-    //   })
+    case 'REMOVE_LIKE':
+      return state.map(p => {
+        if (action.id !== p.id) return p
+        let indexOfUser = p.like.indexOf(action.user)
+        return {
+          ...p,
+          likeList: [
+            likeList.slice(0, indexOfUser).concat(likeList.slice(indexOfUser + 1))
+          ],
+          likes: likes--
+        }
+      })
 
     default:  
       return state

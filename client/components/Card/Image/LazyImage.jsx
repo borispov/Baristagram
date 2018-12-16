@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {Image, Visibility, Loader } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { sendLikeToDB, removeLikeFromDB } from '../../../actions/actionCreators'
+import { checkUserLikeList } from './checkUserLikeList'
 
-export default class LazyImage extends Component {
+class LazyImage extends Component {
   static propTypes = {
     src: PropTypes.string.isRequired,
     size: PropTypes.string
-  }
-
-  static defaultProps = {
-    // size: 'medium'
   }
 
   state = { 
@@ -22,6 +21,13 @@ export default class LazyImage extends Component {
     })
   }
 
+  likeOnDoubleClick = () => {
+    const { postID, user, likeList } = this.props
+    const isAlreadyLiked = checkUserLikeList(user, likeList)
+    !isAlreadyLiked &&
+      this.props.sendLikeToDB(postID, user)
+  }
+
   render() {
     const { size } = this.props
     if (!this.state.show) {
@@ -31,6 +37,14 @@ export default class LazyImage extends Component {
         </Visibility>
       )
     }
-    return <Image className="card-container__img" {...this.props} />
+    return <Image className="card-container__img" src={this.props.src} onDoubleClick={this.likeOnDoubleClick}/>
   }
 }
+
+const mapStatetoProps = (state, props) => {
+  const thePostLikeList = state.posts.filter(x => x._id === props.postID)[0].likeList
+  return {
+    likeList: thePostLikeList
+  }
+}
+export default connect(mapStatetoProps, { sendLikeToDB, removeLikeFromDB })(LazyImage)

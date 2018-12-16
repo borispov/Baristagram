@@ -64,4 +64,60 @@ router.post('/api/removeComment', (req, res, next) => {
     .catch(error => console.log('error has happened:  ', err))
 })
 
+router.post('/api/removeLike', async (req, res, next) => {
+  console.log('--- removing a like')
+  const { postID, userDeliking } = req.body
+
+  const conditions = {
+    _id: postID,
+    likeList: {$eq: userLiking}
+  }
+
+  const theUpdate = {
+    $inc: {likes: -1}, 
+    $pull: {likeList: userLiking} 
+  }
+
+  Post.findOneAndUpdate(conditions, theUpdate) 
+    .then(d => res.json(d))
+    .catch(err => res.json(err))
+})
+
+router.post('/api/addLike', (req, res, next) => {
+  console.log('-----likin a photo Yo!')
+  const { postID, userLiking } = req.body
+
+  const conditions = {
+    _id: postID,
+    likeList: {$ne: 'LoLkity!!!'}
+  }
+
+  const theUpdate = {
+    $inc: {likes: 1}, 
+    $push: {likeList: 'LoLkity!'} 
+  }
+
+  console.log(conditions)
+  console.log('--------------')
+  console.log(theUpdate)
+  Post.findOneAndUpdate(conditions, theUpdate, (err, doc) => {
+    if (err) {
+      console.log(`error occured in query: : : ${err}`)
+      return res.status(400).json(`Perhaps wrong Query ${err}`)
+    } else if (doc === null) {
+      return res.status(204).json('perhaps already liked by user')
+    }
+    return res.status(200).json(doc)
+  })
+    // .then(resp => {
+    //   console.log(resp)
+    //   return res.json(resp)
+    // })
+    // .catch(err => {
+    //   console.log('caught an error: ', err)
+    //   res.json(err)
+    // })
+
+})
+
 module.exports = router

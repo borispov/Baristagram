@@ -17,10 +17,6 @@ const CommentSchema = new Schema({
 })
 
 const PostSchema = new Schema({
-  // postid: {
-  //   type: String,
-  //   required: true
-  // },
   image: {
     pathToFile: String,
     data: Buffer,
@@ -40,6 +36,10 @@ const PostSchema = new Schema({
   likes: {
     type: Number,
     default: 0
+  },
+  likeList: {
+    type: [String],
+    default: []
   },
   date: {
     type: Date,

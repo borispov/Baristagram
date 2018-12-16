@@ -1,9 +1,50 @@
 import axios from 'axios'
 
-export const addLike = (index) => {
+export const sendLikeToDB = (postID, userLiking) => dispatch => {
+  console.log('--- sendingliketodb ---')
+  const data = {
+    postID,
+    userLiking
+  }
+  axios.post('/api/addLike', data)
+    .then(res => {
+      console.log(res.statusText)
+      if(res.statusText) {
+        dispatch(addLike(postID, userLiking))
+        return res
+      }
+    })
+    .catch(err => console.log('cant add LIKE', err))
+}
+
+export const removeLikeFromDB = (postID, userDeliking) => dispatch => {
+  const data = {
+    postID,
+    userDeliking
+  }
+  axios.post('/api/removeLike', data)
+    .then(res => {
+      if (res.statusText) {
+        dispatch(removeLike(id, userDeliking))
+        return res
+      }
+    })
+    .catch(err => console.log('cant remove like', err))
+}
+
+export const addLike = (id, user) => {
   return {
     type: 'ADD_LIKE',
-    index
+    id,
+    user
+  }
+}
+
+export const removeLike = (id, user) => {
+  return {
+    type: 'REMOVE_LIKE',
+    id,
+    user
   }
 }
 
