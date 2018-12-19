@@ -1,13 +1,17 @@
 import { connect } from 'react-redux'
 import ProfilePage from './ProfilePage'
-// import { fetchProfileImages } from '../../actions/actionCreators'
+import axios from 'axios'
+
+import { fetchImages } from '../../actions/fetchPosts'
 
 const mapStateToProps = state => {
+  const author = state.auth.user.name
+
   return {
-    username: state.auth.user.name
+    posts: state.posts,
+    author,
+    loader: state.loader.loading
   }
 }
 
-// const mapDispatchToProps = dispatch => ({})
-
-export default connect(mapStateToProps, null)(ProfilePage)
+export default connect(mapStateToProps, {fetchImages})(ProfilePage)

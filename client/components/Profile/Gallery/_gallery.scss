@@ -1,0 +1,37 @@
+.profile__gallery {
+
+  div {
+    width: 100vw * 0.4 !important;
+    height: 100vw * 0.4 !important;
+  }
+  img {
+    display: block;
+    margin: 0 auto;
+  }
+  img {
+    height: 100vw * 0.33 !important;
+    width: 100vw * 0.33 !important;
+    max-width: 290px !important;
+    max-height: 290px !important;
+    border: '#000';
+  }
+
+  @media (min-width: 1024px) {
+    img {
+      min-width: 290px !important;
+      min-height: 290px !important;
+    }
+  }
+
+  @media (max-width: 620px) {
+    img {
+      width: 100vw * 0.33 !important;
+      height: 100vw * 0.33 !important;
+    }
+
+    .column {
+      margin: 0 auto !important;
+    }
+  }
+
+}

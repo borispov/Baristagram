@@ -17,8 +17,11 @@ router.post( '/api/register', (req, res) => {
 
     if (!isValid) return res.status(400).json(errors)
 
+    console.log('-request is valid... proceeding.')
+
     User.findOne({ email: email })
       .then(user => {
+        console.log(!user)
         if(user) res.status(400).json({email: 'Email already exists!'})
         else {
           const newUser = new User({
@@ -33,6 +36,7 @@ router.post( '/api/register', (req, res) => {
               bcrypt.hash(newUser.password, salt, async (err,hash) => {
                 if (err) console.error('err hashing...', err)
                 else {
+                  console.log('--creating new user ...')
                   newUser.password = hash
                   const user = await newUser.save().then(user => user)
                   res.json(user)

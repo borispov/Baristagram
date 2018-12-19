@@ -27,11 +27,11 @@ router.post('/api/addphoto', async (req, res, next) => {
 router.get('/api/getProfile/:user', (req, res, next) => {
   const { user } = req.params
 
-  Post.find({ author: user})
+  Post.find({ author: user }).sort('-date')
     .then(posts => {
       const newPostsArray = posts.map(post => {
-        let d = post.image.data.toString('base64')
-        return {...post, image: {...post.image, data: d}}
+        // let d = post.image.data.toString('base64')
+        return {...post, image: {...post.image}}
       })
       res.json(newPostsArray)
     })

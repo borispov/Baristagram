@@ -10,35 +10,53 @@ class Gallery extends React.Component {
   }
 
   // TODO: Add author and comment functionality -- basically allow posts as well. 
-  async componentDidMount(){
-    const { username } = this.props
-    const getData = await this.getProfileImage(username)
-    const posts = getData.map(i => ({path: i.image.pathToFile}))
+  // async componentDidMount(){
+    // this.setState({ posts: myPosts })
+
+    // const getData = await this.getProfileImage(username)
+    // const posts = getData.map(i => ({path: i.image.pathToFile}))
+
+
     // ,type: i.image.contentType, data: i.image.data
     // const images = await posts.map(img => img.path)
     // console.log(images)
     // let type = posts.image.contentType.split('/')
-    this.setState({ posts })
-  }
 
-  getProfileImage = async (name) => {
-    return await axios.get(`/api/getProfile/${name}`)
-      .then(res => {
-        return res.data
-      })
-      .catch(err => console.error(err))
-  }
+    // this.setState({ posts })
+  // }
+
+  // getProfileImage = async (name) => {
+  //   return await axios.get(`/api/getProfile/${name}`)
+  //     .then(res => {
+  //       return res.data
+  //     })
+  //     .catch(err => console.error(err))
+  // }
+
+  
 
   render() {
-    const {posts} = this.state
+
+    const picStyle = {
+      maxWidth: '300px',
+      maxHeight: '250px',
+      minHeight: '250px',
+      width: '300px',
+      border: '#000',
+    }
+
+    const { myPosts, username } = this.props
+    console.log(myPosts)
     return (
       <Container>
-        <Grid stackable celled centered relaxed columns={3}>
+        <Grid doubling stackable celled relaxed columns={3} >
           {
-            posts && posts.map((eachPost, i) => {
-              let src = eachPost.path || `data:${eachPost.type};base64,${eachPost.data}`
+            myPosts && myPosts.map((eachPost, i) => {
+              console.log(src)
+              let src = eachPost.image.pathToFile
+              let altSrc = `data:${eachPost.image.data.type};base64,${eachPost.image.data.data}`
               return (
-                <Grid.Column key={i}>
+                <Grid.Column key={i} className="profile__gallery">
                   <Image src={src} />
                 </Grid.Column>
               )

@@ -39,11 +39,31 @@ class ContentGrid extends React.Component {
     
   render() {
     const { posts } = this.props
+    const isLoading = this.props.loader
+
+    const theContent = !isLoading
+      ? (
+        posts && 
+          posts.map((post, i) => {
+            return <CardContainer
+              caption={post.caption}
+              author={post.author}
+              likeList={post.likeList}
+              likes={post.likes}
+              source={post.image.pathToFile}
+              comments={post.comments}
+              id={post._id}
+              key={i} />
+          })
+      )
+      : <Icon centered style={{margin: '5vh auto'}} loading size="massive" name="spinner" color="blue"></Icon>
+
     return (
       <Grid centered columns={4}>
         <div ref={this.handleContextRef}></div>
         <Grid.Column width={10}>
-          { 
+          {theContent}
+          {/* { 
             posts && 
               posts.map((post, i) => {
                 return <CardContainer
@@ -56,7 +76,7 @@ class ContentGrid extends React.Component {
                   id={post._id}
                   key={i} />
               })
-          }
+          } */}
           
         </Grid.Column>
         <Grid.Column width={3}>
@@ -81,7 +101,8 @@ class ContentGrid extends React.Component {
 const mapStateToProps = (state) => {
   return {
     posts: state.posts,
-    comments: state.comments
+    comments: state.comments,
+    loader: state.loader.loading
   }
 }
 

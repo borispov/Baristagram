@@ -13,7 +13,8 @@ export const postImages = data => dispatch => {
     .then(res => {
       if(res.statusText) {
         const posts = res.data.response
-        dispatch(postPhotoSuccess(res.data.response))
+        // console.log(posts)
+        dispatch(postPhotoSuccess(posts))
         dispatch({
           type: 'LOADER',
           payload: false
@@ -32,7 +33,7 @@ export const fetchImages = () => {
         if (!posts.statusText) {
           throw Error(posts.statusText)
         }
-        console.log(posts)
+        // console.log(posts)
         dispatch(fetchPhotosSuccess(posts.data))
         dispatch({
           type: 'LOADER',

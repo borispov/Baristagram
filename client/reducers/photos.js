@@ -12,9 +12,9 @@ export function photoReducers(state = [], action){
       ]
 
     case FETCH_PHOTOS_SUCCESS:
-      console.log(action.data)
+      // console.log(action.data)
       return [
-        ...state,
+        // ...state,
         ...action.data
       ]
 
