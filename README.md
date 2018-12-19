@@ -2,13 +2,37 @@
 
 <center> Instaclone for redux/react studying purposes, along with good portion of node. </center>
 
+# _Instructions To Run The Project_:
+
+First, clone the repository.
+```
+git clone git@github.com:borispov/Baristagram.git
+```
+Secondly, install the dependencies.
+```
+npm install
+```
+Run `npm start` and open up http://localhost:3002
+
+There are few more development/build scripts and they're not necessary to run the project.
+
+In a separate terminal:
+```
+npm run webpack:watch
+npm run css:watch
+```
+
+What this does, is basically compile all the React code (.JSX and ES6 supported), I do not use Webpack to compile the CSS.
+I chose to compile css independently to avoid webpack's process each time I add/edit the css.
+*The test command is irrelevant at this point, as there is no testing implemented*
+
 # Introduction: 
 This project arose along with my decision to finally study Redux and expand my well-of-knowledge especially with React's ecosystem. However, I was bit initimidated approaching the docs, reading tutorials OR even watching videos on the subject, I don't know what it is, perhaps the scary boilerplate just to set you up. I ended up finding Wes Bos has a free course and according to comments/review people are enjoying it. I signed up and discovered the course is a bit old and most of it doesn't implement ES6, I was displeased. 
 Short after, I decided I'm big enough to try and make an instagram clone using Redux by myself without relying on a code-along-tut.
 
-### Tools: 
+### Tools Used: 
 - React, React Router, Redux (and redux-thunk). 
-- Semantic UI React ~ I decided to give it a try. I write briefly my opinion below. 
+- Semantic UI React & SASS ~ I decided to give semanticUI a try. I write briefly my opinion below. 
 - NodeJS with Express framework (express-fileupload for handling uploads)
 - Passportjs with JWT authtentication
 - mongoDB via mongoose (mLabs.com) 
@@ -31,7 +55,7 @@ Then, I wanted to find a simple way to handle image-uploading. I checked solutio
 Well, took me *LOTS* of time to configure webpack and babel to even run react properly. But that's fine. 
 This time, I wanted to use better structure pattern for my components but I failed badly IMHO, because it's inconsistent and bit scattered, I wanted to seperate the components with containers, but perhaps I was overwhelmed by lots of new things I had to learn and digest.
 
-<h4>SEMANTIC UI </h4>
+#### SEMANTIC UI
 I really liked the simplicity at first usage. importing the neccessary component, rendering, providing props, easy. However, things started to get problematic for me when the configuration out of the box weren't enough -- I had to start customising and that's, really, is quite a pain. you have to provide !important flags to override certain properties in order for your styling have effect.
 I had problem configuring a form to use encType for the file-uploading, so I used regular <form> tag.
 I also have (*still do*) a problem with Grid's responsiveness being kinda bugged, I have not idea how to solve it, I tried providing my own css and it works partially.
