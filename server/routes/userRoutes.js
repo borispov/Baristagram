@@ -10,10 +10,27 @@ const validateLoginInput = require('../validation/login');
 const SALT_R = 10
 const User = require('../models/User')
 
-router.post( '/api/register', (req, res) => {
+router.post('/api/register', async (req, res) => {
+
+    console.log(req.files)
     console.log('GoGoGo!')
     const { errors, isValid } = validateRegisterInput(req.body)
-    const { email, name, password } = req.body
+    const { email, name, password, avatar } = req.body
+    
+    console.log(req.body)
+    
+    // console.log(req)
+    // const ext = avatar.name.split('.')[1]
+    // const fileName = `${name}.${ext}`
+    // const imagePath = path.join(__dirname ,'..', '..', 'public', 'files', fileName)
+    // await avatar.mv(imagePath, (err) => {
+    //   if (err) console.log('error', err)
+    //   else console.log(`file: public/files/${fileName}`)
+    // })
+    // const postPath = `/files/${fileName}`
+
+
+    return null
 
     if (!isValid) return res.status(400).json(errors)
 
@@ -27,7 +44,8 @@ router.post( '/api/register', (req, res) => {
           const newUser = new User({
             name,
             email,
-            password
+            password,
+            postPath
           })
 
           bcrypt.genSalt(SALT_R, (err, salt) => {

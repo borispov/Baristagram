@@ -4,11 +4,29 @@ const path = require('path')
 const postService = require('../services')
 const mongoose = require('mongoose')
 
+
+const sharp = require('sharp');
+
+const resize = require('../services/resize')
 const Post = require('../models/Post')
 
 const BASE64 = 'base64'
 
 mongoose.set('useFindAndModify', false);
+
+router.post('/api/addAvatar', async (req, res) => {
+
+  const { username } = req.body
+  const upload = req.files.file
+  const ext = upload.name.split('.')[1]
+  const fileName = `${username}.${ext}`
+
+  const response = await postService.addAvatar(upload, fileName, username)
+  if (response instanceof Error) {
+    return res.status(400).json(response.message)
+  }
+  return res.status(200).json('avatar uploaded successfuly')
+})
 
 router.post('/api/addphoto', async (req, res, next) => {
 
@@ -21,6 +39,7 @@ router.post('/api/addphoto', async (req, res, next) => {
 
   const response = await postService.addPost(upload, ext, username,userid, caption)
   res.json({response})
+
 })
 
 

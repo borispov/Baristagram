@@ -3,6 +3,8 @@ import setAuthToken from '../setAuthToken'
 import jwt_decode from 'jwt-decode'
 
 export const registerUser = (user, history) => dispatch => {
+    console.log(user)
+    console.log('hello registerUser action')
     axios.post('/api/register', user)
             .then(res => history.push('/login'))
             .catch(err => {

@@ -1,10 +1,12 @@
 const fs = require('fs')
 const path = require('path')
+const sharp = require('sharp')
 
 class PostService {
   constructor(PostModel) {
     this.PostModel = PostModel
     this.addPost = this.addPost.bind(this)
+    this.addAvatar = this.addAvatar.bind(this)
   }
 
   async addPost(upload, ext, author, userid, caption) {
@@ -29,6 +31,31 @@ class PostService {
     })
 
     return post
+  }
+
+  async addAvatar(upload, fileName, username) {
+    console.log('adding an avatar...')
+    const imagePath = path.join(__dirname ,'..', '..', 'public', 'files', fileName)
+
+    try {
+      return sharp(upload, {
+        failOnError: true
+      })
+      .resize({
+        width: 150,
+        height: 150
+      })
+      .toFile(imagePath, (err, resp) => {
+        if (err) console.error(err)
+        return resp
+      })
+
+    } catch (error) {
+      console.log('error caught.')
+      return error
+    }
+
+  
   }
 
   async getProfileImages(user) {

@@ -41,6 +41,7 @@
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.83.0",
+    "sharp": "^0.21.1",
     "validator": "^10.9.0"
   },
   "devDependencies": {

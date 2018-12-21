@@ -41,7 +41,7 @@ export class Main extends Component {
             <Navbar />
             <Route path={paths.root} exact component={ContentGrid} />
             <Route path={paths.profile_page} component={ProfileContainer} />
-            <Route path={paths.explore} component={Explore} />
+            {/* <Route path={paths.explore} component={Explore} /> */}
             <Route path='/post' component={AddPostContainer} />
             {/* <Route path={paths.login} component={Login} /> */}
             {/* <Route path={paths.register} component={RegisterContainer}/> */}

@@ -31,19 +31,20 @@ class MenuBar extends React.Component {
               </Link>
             </Menu.Item>
   
-            <Menu.Item position="right">
+          {/* This is a search bar */}
+            {/* <Menu.Item position="right">
               <SearchBar />
-            </Menu.Item>
+            </Menu.Item> */}
   
             <Menu.Item className="menu-item menu-item--last" position="right">
               <Link to="/profile"><Icon size="large" link name="user circle" /></Link>
             </Menu.Item>
   
-            <Menu.Item className="menu-item" >
+            {/* <Menu.Item className="menu-item" >
               <Link to="/explore">
                 <Icon size="large" link name="wpexplorer" />
               </Link>
-            </Menu.Item>
+            </Menu.Item> */}
   
             {isAuthenticated &&(
               <Menu.Item className="menu-item" >
