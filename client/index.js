@@ -11,7 +11,12 @@ import { store } from './store/store'
 if (localStorage.jwtToken) {
   setAuthToken(localStorage.jwtToken)
   const decoded = jwt_decode(localStorage.jwtToken)
-  store.dispatch(setCurrentUser(decoded))
+  if (localStorage.avatarPath) {
+    const avatarPath = localStorage.avatarPath
+    store.dispatch(setCurrentUser(decoded, avatarPath))
+  } else {
+    store.dispatch(setCurrentUser(decoded))
+  }
 
   const currentTime = Date.now() / 1000
   if (decoded.exp < currentTime) {

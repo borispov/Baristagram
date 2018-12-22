@@ -19,12 +19,15 @@ export const registerUser = (user, history) => dispatch => {
 export const loginUser = (user, history) => dispatch => {
     axios.post('/api/login', user)
             .then(res => {
-                const { token } = res.data
+                const { token, avatarPath } = res.data
+                console.log(avatarPath)
                 localStorage.setItem('jwtToken', token)
-                setAuthToken(token)
+                localStorage.setItem('avatarPath', avatarPath)
+                setAuthToken(token, avatarPath)
                 const decoded = jwt_decode(token)
-                dispatch(setCurrentUser(decoded))
-                history.push('/');
+                console.log(localStorage)
+                dispatch(setCurrentUser(decoded, avatarPath))
+                history.push('/')
             })
             .catch(err => {
                 console.log(`error occured: ${err}`)
@@ -35,15 +38,17 @@ export const loginUser = (user, history) => dispatch => {
             })
 }
 
-export const setCurrentUser = decoded => {
+export const setCurrentUser = (decoded, avatarPath) => {
     return {
         type: 'SET_CURRENT_USER',
-        payload: decoded
+        payload: decoded,
+        avatarPath
     }
 }
 
 export const logoutUser = (history) => dispatch => {
-  localStorage.removeItem('jwtToken');
+  localStorage.removeItem('jwtToken')
+  localStorage.removeItem('avatarPath')
   setAuthToken(false);
   dispatch(setCurrentUser({}));
   history && history.push('/login');

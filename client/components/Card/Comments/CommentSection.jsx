@@ -22,8 +22,9 @@ class CommentSection extends Component {
       <Comment.Group>
         {
           this.props.comments.map((com, i) => {
+            const avaPath = com.author.replace(/ /g, '_')
             return <Comment key={`${com.id}_${i}`} className={this.props.classes && this.props.classes}>
-              <Comment.Avatar src={logo} />
+              <Comment.Avatar src={`/files/${avaPath}.png` || logo} />
               <Comment.Author as='a'>{com.author || 'Johnsta Proshlow'}</Comment.Author>
               <Comment.Metadata>
                 <div className="comment__time">{this.props.time || 'Today at 05:49PM'}</div>

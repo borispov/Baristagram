@@ -10,6 +10,9 @@ const CommentSchema = new Schema({
     type: String,
     required: true
   },
+  avaPath: {
+    type: String
+  },
   date: {
     type: Date,
     default: Date.now

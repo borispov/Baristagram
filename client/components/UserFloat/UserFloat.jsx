@@ -10,7 +10,7 @@ const UserFloat = (props) => {
   const showUserFloatOrReg = isLogged ?
     ( 
       <>
-        <Item.Image size="tiny"><Avatar className="userfloat__avatar" /></Item.Image>
+        <Item.Image size="tiny"><Avatar className="userfloat__avatar" src={props.userAuth.user.avatarPath} /></Item.Image>
           <Item.Content verticalAlign='middle'>
             <Item.Header as="a">{props.userAuth.user.name.split(' ')[0]}</Item.Header>
             <Item.Meta>{props.userAuth.user.name}</Item.Meta>

@@ -8,10 +8,14 @@ const initialState = {
 export function authReducer(state = initialState, action ) {
     switch(action.type) {
         case 'SET_CURRENT_USER':
+            console.log(action)
             return {
                 ...state,
                 isAuthenticated: !isEmpty(action.payload),
-                user: action.payload
+                user: {
+                    ...action.payload,
+                    avatarPath: action.avatarPath
+                }
             }
         default: 
             return state;

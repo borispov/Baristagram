@@ -4,7 +4,7 @@ import { Header, Grid, Button } from 'semantic-ui-react'
 
 const ProfileImg = (props) => {
   return (
-      <Avatar size={props.size}/>
+      <Avatar src={props.src} size={props.size}/>
   )
 }
 

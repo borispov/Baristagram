@@ -18,23 +18,9 @@ const mapDispatchToProps = dispatch => {
       const name = e.target.name.value
       const email = e.target.email.value
       const password = e.target.password.value
-      console.log(e.target.upload.files[0])
       const avatar = e.target.upload.files[0]
-      console.log(avatar)
       // const jsonUser = RegisterRequest(name, email, password)
       const data = await postForm(avatar, null, null, 'avatar', { name, email, password })
-      // const data = {
-      //   name,
-      //   email,
-      //   password,
-      //   avatar
-      // }
-      // const jsonUser = {
-      //   "name": name,
-      //   "email": email,
-      //   "password": password,
-      //   "avatar": avatar
-      // }
 
       try {
         dispatch(registerUser(data, history))

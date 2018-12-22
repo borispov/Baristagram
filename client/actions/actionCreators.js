@@ -49,11 +49,12 @@ export const removeLike = (id, user) => {
   }
 }
 
-export const addComment = (author, postID, comment) => dispatch => {
+export const addComment = (author, postID, comment, avaPath) => dispatch => {
   const data = {
     author,
     postID,
-    comment
+    comment,
+    avatarPath: avaPath
   }
   axios.post('/api/addComment', data)
     .then(res => {
@@ -70,7 +71,8 @@ export const addCommentSuccess = data => {
     type: 'ADD_COMMENT',
     author: data.author,
     postID: data.postID,
-    comment: data.comment
+    comment: data.comment,
+    avatarPath: data.avatarPath
   }
 }
 

@@ -17,11 +17,12 @@ const CardContainer = (props) => {
   const { author, likeList} = props
   const isAlreadyLiked = checkUserLikeList(author, likeList)
 
+  const avaPath = author.replace(/ /g, '_')
   return (
     <Card className="card-container">
       <Card.Content>
         <div className="card-container__heading">
-          <Avatar className="card-container__avatar" floated="left" size="large" />
+          <Avatar src={`/files/${avaPath}.png`} className="card-container__avatar" floated="left" size="large" />
           {/* <Card.Header className="card-container__header" >{props.author || 'JonhstaGigs'}</Card.Header> */}
           <Author author={props.author} className="card-container__header"/>
         </div> 

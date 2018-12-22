@@ -33,9 +33,10 @@ class PostService {
     return post
   }
 
-  async addAvatar(upload, fileName, username) {
+  async addAvatar(upload, name) {
+    const userName = name.replace(/ /g, '_')
     console.log('adding an avatar...')
-    const imagePath = path.join(__dirname ,'..', '..', 'public', 'files', fileName)
+    const imagePath = path.join(__dirname ,'..', '..', 'public', 'files', `${userName}.png`)
 
     try {
       return sharp(upload, {
@@ -51,6 +52,7 @@ class PostService {
       })
 
     } catch (error) {
+      // console.log(error)
       console.log('error caught.')
       return error
     }

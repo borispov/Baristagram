@@ -10,7 +10,8 @@ const mapStateToProps = state => {
   return {
     posts: state.posts,
     author,
-    loader: state.loader.loading
+    loader: state.loader.loading,
+    userAvatar: state.auth.user.avatarPath
   }
 }
 

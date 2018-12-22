@@ -45,7 +45,7 @@ class ProfilePage extends React.Component {
         <div style={containMe}>
           <Grid style={{margin: '0 auto'}} centered columns={6}>
             <Grid.Column verticalAlign="middle">
-              <ProfileImg size='small'/>
+              <ProfileImg src={this.props.userAvatar} size='small'/>
             </Grid.Column>
             <Grid.Column mobile={12}>
               <div className="flex-row" style={flexRow}>

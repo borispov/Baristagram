@@ -56,7 +56,7 @@ class ContentGrid extends React.Component {
               key={i} />
           })
       )
-      : <Icon centered style={{margin: '5vh auto'}} loading size="massive" name="spinner" color="blue"></Icon>
+      : <Icon style={{margin: '5vh auto'}} loading size="massive" name="spinner" color="blue"></Icon>
 
     return (
       <Grid centered columns={4}>
