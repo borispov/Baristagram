@@ -68,7 +68,7 @@ router.get('/api/fetchPhotos', (req, res, next) => {
 
 router.post('/api/addComment', (req, res, next) => {
   console.log('Adding A Comment to Post in DB')
-  const message = { author, comment, avatarPath } = req.body
+  const message = { author, comment } = req.body
 
   Post.findOneAndUpdate({_id: req.body.postID}, {$push: {comments: message}})
   .then(posts => res.json(req.body))

@@ -22,13 +22,12 @@ export class CommentBox extends Component {
 
   handleSubmit(e){ 
     if (e.key === 'Enter') {
-      let avaPath = this.props.avatar
       let postID = this.props.postID
       let comment = String(this.state.inputValue)
       let currentUsername = this.props.user || 'Johnsta'
       this.props.dispatch(addComment(currentUsername, postID, comment))
       e.preventDefault()
-      this.setState({inputValue: ''}
+    this.setState({inputValue: ''}
       )
     }
   }
@@ -48,8 +47,7 @@ CommentBox.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.auth.user.name,
-    avatar: state.auth.user.avatarPath
+    user: state.auth.user.name
   }
 }
 
