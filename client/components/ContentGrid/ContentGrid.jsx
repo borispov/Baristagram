@@ -43,25 +43,33 @@ class ContentGrid extends React.Component {
 
     const theContent = !isLoading
       ? (
-        posts && 
-          posts.map((post, i) => {
-            return <CardContainer
-              caption={post.caption}
-              author={post.author}
-              likeList={post.likeList}
-              likes={post.likes}
-              source={post.image.pathToFile}
-              comments={post.comments}
-              id={post._id}
-              key={i} />
-          })
+        <Grid.Column width={10}>
+          {posts && 
+            posts.map((post, i) => {
+              return <CardContainer
+                caption={post.caption}
+                author={post.author}
+                likeList={post.likeList}
+                likes={post.likes}
+                source={post.image.pathToFile}
+                comments={post.comments}
+                id={post._id}
+                key={i} />
+            })}
+        </Grid.Column>
       )
-      : <Icon style={{margin: '5vh auto'}} loading size="massive" name="spinner" color="blue"></Icon>
+      : (
+        <Grid.Column width={10}>
+          <Container textAlign="center">
+            <Icon style={{marginTop: '15vh'}} loading size="huge" name="spinner" color="blue"></Icon>
+          </Container>
+        </Grid.Column>
+      )
 
     return (
       <Grid centered columns={4}>
         <div ref={this.handleContextRef}></div>
-        <Grid.Column width={10}>
+        {/* <Grid.Column width={10}> */}
           {theContent}
           {/* { 
             posts && 
@@ -78,7 +86,7 @@ class ContentGrid extends React.Component {
               })
           } */}
           
-        </Grid.Column>
+        {/* </Grid.Column> */}
         <Grid.Column width={3}>
           <Sticky context={ this.state.contextRef } style={{marginTop: '40px'}}>
             <Segment style={{marginTop: '40px'}}>

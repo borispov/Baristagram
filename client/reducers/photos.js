@@ -12,9 +12,17 @@ export function photoReducers(state = [], action){
       ]
 
     case FETCH_PHOTOS_SUCCESS:
-      // console.log(action.data)
+      const oldStateIds = state.map(k => k._id)
+      const newData = action.data
+      const noDups = newData.filter(newPost => {
+        if (!oldStateIds.includes(newPost._id)) {
+          return newPost
+        }
+      })
+      console.log(`no dups: ${noDups}`)
+      if (noDups) return noDups
       return [
-        // ...state,
+        ...state,
         ...action.data
       ]
 

@@ -11,7 +11,9 @@ class ProfilePage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.fetchImages()
+    if (!this.props.posts.length ) {
+      this.props.fetchImages()
+    }
   }
  
   render() {
@@ -34,12 +36,19 @@ class ProfilePage extends React.Component {
     }
   
     const { posts } = this.props
-
     const author = this.props.author
+    let myPosts
+    posts &&
+      (
+        myPosts = posts.filter(x => {
+          console.log(x.author + ' and ' + author)
+          return x.author === author
+        })
+      )
     const isLoading = this.props.loader
-    const myPosts = posts.filter(x => x.author === author)
     const postsLength = myPosts.length || 0
-    console.log(posts)
+    console.log('------myPosts:\n')
+    console.log(myPosts)
     return (
       <div>
         <div style={containMe}>
