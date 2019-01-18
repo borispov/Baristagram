@@ -12,7 +12,7 @@ const UserFloat = (props) => {
       <>
         <Item.Image size="tiny"><Avatar className="userfloat__avatar" src={props.userAuth.user.avatarPath} /></Item.Image>
           <Item.Content verticalAlign='middle'>
-            <Item.Header as="a">{props.userAuth.user.name.split(' ')[0]}</Item.Header>
+            <Item.Header as="a" href="/profile">{props.userAuth.user.name.split(' ')[0]}</Item.Header>
             <Item.Meta>{props.userAuth.user.name}</Item.Meta>
         </Item.Content>
       </>

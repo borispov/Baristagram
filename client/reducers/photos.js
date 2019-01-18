@@ -19,11 +19,15 @@ export function photoReducers(state = [], action){
           return newPost
         }
       })
-      console.log(`no dups: ${noDups}`)
-      if (noDups) return noDups
+      // console.log(action.data)
+      if (noDups.length) {
+        console.log(`Sliced off duplicates: ${noDups}`)
+        return noDups
+      }
+
       return [
         ...state,
-        ...action.data
+        // ...action.data
       ]
 
     case 'ADD_PHOTO':
@@ -71,24 +75,28 @@ export function photoReducers(state = [], action){
     case 'ADD_LIKE':
       return state.map((photo) => {
         if (action.id !== photo._id) return photo
-        let user = action.user
-        return {
+
+        let photoAfterLike = {
           ...photo,
-          likeList: [...photo.likeList, user],
-          likes: photo.likes++
+          likeList: [...photo.likeList, action.user],
+          likes: photo.likes + 1
         }
+        // console.log(photoAfterLike)
+        return photoAfterLike
       })
 
     case 'REMOVE_LIKE':
       return state.map(p => {
         if (action.id !== p._id) return p
-        let indexOfUser = p.like.indexOf(action.user)
+        const indexOfUser = p.likeList.indexOf(action.user)
+        const newList = p.likeList
+          .slice(0, indexOfUser)
+          .concat(p.likeList.slice(indexOfUser + 1))
+
         return {
           ...p,
-          likeList: [
-            likeList.slice(0, indexOfUser).concat(likeList.slice(indexOfUser + 1))
-          ],
-          likes: likes--
+          newList,
+          likes: p.likes - 1
         }
       })
 

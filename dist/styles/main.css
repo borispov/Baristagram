@@ -107,7 +107,9 @@ a {
   display: inline-block; }
   .stats:nth-of-type(2n) {
     margin-left: 5px; }
-  .stats .stats__title {
+  .stats .stats__title.hed {
+    font-size: 1.35em;
+    font-weight: bold;
     color: #555252; }
 
 .userfloat {

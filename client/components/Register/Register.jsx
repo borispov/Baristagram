@@ -91,11 +91,11 @@ class Register extends React.Component {
               <Header textAlign="center" as="h3">Join BaristaGramzz !</Header>
   
               <Form.Field > 
-                <Form.Input onChange={this.handleInputChange} name="name" icon="user" iconPosition="left" placeholder="Name" required />
+                <Form.Input onChange={this.handleInputChange} name="name" icon="user" iconPosition="left" placeholder="Name" required autoComplete="username" />
               </Form.Field>
   
               <Form.Field>
-                <Form.Input onChange={this.handleInputChange} name="password" icon="lock" iconPosition="left" required placeholder='Password' type="password" />
+                <Form.Input onChange={this.handleInputChange} name="password" icon="lock" iconPosition="left" required placeholder='Password' type="password" autoComplete="new-password" />
               </Form.Field>
   
               <Form.Field>

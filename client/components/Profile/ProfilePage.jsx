@@ -41,14 +41,13 @@ class ProfilePage extends React.Component {
     posts &&
       (
         myPosts = posts.filter(x => {
-          console.log(x.author + ' and ' + author)
           return x.author === author
         })
       )
     const isLoading = this.props.loader
     const postsLength = myPosts.length || 0
-    console.log('------myPosts:\n')
-    console.log(myPosts)
+    // console.log('------myPosts:\n')
+    // console.log(myPosts)
     return (
       <div>
         <div style={containMe}>
@@ -59,9 +58,9 @@ class ProfilePage extends React.Component {
             <Grid.Column mobile={12}>
               <div className="flex-row" style={flexRow}>
               <Header as='h3' style={{padding: '0'}}>{author}</Header>
-              <Button style={{marginLeft: '15px'}} compact basic >Edit Profile</Button>
               </div>
               <Stats postsNum={postsLength} /> 
+            <Button style={{marginTop: '35px'}} inverted color='violet' >add photo</Button>
             </Grid.Column>
           </Grid>
         </div>

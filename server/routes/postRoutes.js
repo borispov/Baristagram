@@ -89,12 +89,12 @@ router.post('/api/removeLike', async (req, res, next) => {
 
   const conditions = {
     _id: postID,
-    likeList: {$eq: userLiking}
+    likeList: {$eq: userDeliking}
   }
 
   const theUpdate = {
     $inc: {likes: -1}, 
-    $pull: {likeList: userLiking} 
+    $pull: {likeList: userDeliking} 
   }
 
   Post.findOneAndUpdate(conditions, theUpdate) 

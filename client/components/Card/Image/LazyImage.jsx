@@ -16,7 +16,14 @@ class LazyImage extends Component {
     show: false,
     setOn: 200,
     setOff: 200,
-    visibleIcon: false
+    visibleIcon: false,
+    isLiked: null
+  }
+
+  async componentDidMount() {
+    this.setState({
+      isLiked: this.props.isLiked
+    })
   }
 
   showImg = () => {
@@ -26,11 +33,14 @@ class LazyImage extends Component {
   }
 
   likeOnDoubleClick = async () => {
-    await this.setState({visibleIcon: true})
+    
     const { postID, user, likeList } = this.props
-    const isAlreadyLiked = checkUserLikeList(user, likeList)
-    !isAlreadyLiked &&
-      this.props.sendLikeToDB(postID, user)
+
+    !this.state.isLiked 
+      ? (this.props.sendLikeToDB(postID, user), await this.setState({visibleIcon: true, isLiked: true}))
+      : (this.props.removeLikeFromDB(postID, user), await this.setState({visibleIcon: false, isLiked: false}))
+
+    // this.setState({isLiked: !this.state.isLiked})
     
     await setTimeout(() => {
       this.setState({

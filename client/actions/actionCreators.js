@@ -26,7 +26,7 @@ export const removeLikeFromDB = (postID, userDeliking) => dispatch => {
   axios.post('/api/removeLike', data)
     .then(res => {
       if (res.statusText) {
-        dispatch(removeLike(id, userDeliking))
+        dispatch(removeLike(postID, userDeliking))
         return res
       }
     })

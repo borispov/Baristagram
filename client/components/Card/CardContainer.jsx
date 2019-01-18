@@ -1,6 +1,6 @@
 import React from 'react'
 import Avatar from '../Avatar/avatar'
-import { Card, Image, Icon } from 'semantic-ui-react'
+import { Card, Header } from 'semantic-ui-react'
 import LazyImage from './Image/LazyImage'
 import Author from './Author'
 import logo from '../../assets/images/ma.png'
@@ -14,8 +14,8 @@ const defaultRandom = 'https://source.unsplash.com/random/614x614'
 
 const CardContainer = (props) => {
 
-  const { author, likeList} = props
-  const isAlreadyLiked = checkUserLikeList(author, likeList)
+  const { username, author, likeList} = props
+  const isAlreadyLiked = checkUserLikeList(username, likeList)
 
   const avaPath = author.replace(/ /g, '_')
   return (
@@ -27,9 +27,12 @@ const CardContainer = (props) => {
           <Author author={props.author} className="card-container__header"/>
         </div> 
       </Card.Content>
-      <LazyImage className="card-container__img" isLiked={isAlreadyLiked} likeList={props.likeList} src={props.source || defaultRandom} postID={props.id} user={props.author} rounded/>
+      <LazyImage className="card-container__img" isLiked={isAlreadyLiked} likeList={props.likeList} src={props.source || defaultRandom} postID={props.id} user={props.username} rounded/>
       <Card.Content>
-        <CardIcons likes={props.likes} isLiked={isAlreadyLiked} />
+        <Header>{props.caption}</Header>
+      </Card.Content>
+      <Card.Content>
+        <CardIcons user={props.username} postid={props.id} likes={props.likes} isLiked={isAlreadyLiked} />
       </Card.Content>
       <CommentSection postid={props.id} comments={props.comments} className="card-container__comment" />
       <CommentBoxContainer postID={props.id} />

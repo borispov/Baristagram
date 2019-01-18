@@ -47,6 +47,7 @@ class ContentGrid extends React.Component {
           {posts && 
             posts.map((post, i) => {
               return <CardContainer
+                username={this.props.username}
                 caption={post.caption}
                 author={post.author}
                 likeList={post.likeList}
@@ -110,7 +111,8 @@ const mapStateToProps = (state) => {
   return {
     posts: state.posts,
     comments: state.comments,
-    loader: state.loader.loading
+    loader: state.loader.loading,
+    username: state.auth.user.name
   }
 }
 
